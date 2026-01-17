@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Clinical Evaluation Survey</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-title">MyCourses Evaluation - Created for Ob/Gyn SPE Update Preview
+        
+          </div>
+          <div class="brand-sub">Choose the descriptors that best convey the student's performance.</div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div id="surveyRoot"></div>
+
+        <section class="submitRow">
+          <button id="btnSave" class="btn primary" type="button">Save (download JSON)</button>
+          <button id="btnPrint" class="btn" type="button">Print</button>
+        </section>
+
+        <section class="smallNote">
+          <div class="noteTitle">Privacy note</div>
+          <div class="noteText">
+            This runs locally in your browser. Nothing is uploaded anywhere unless you build a backend later.
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div>Local survey prototype</div>
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+
