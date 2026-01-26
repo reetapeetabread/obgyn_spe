@@ -1,15 +1,15 @@
 /**
  * Branching rubric survey:
- * - Q1: setting (Inpatient / Ambulatory / Surgery)
+ * - Setting question is NOT numbered
  * - NOTHING else renders until setting chosen
- * - Q2–Q? shifts automatically (adds +1 to numbered questions)
+ * - Rubric questions start at 1
  * - Rubric choices 0–4 are vertical via CSS
  * - Comments section is a placeholder
  */
 
 const STATE = { responses: {} };
 
-/* -------------------- BUILDERS (define early) -------------------- */
+/* -------------------- BUILDERS -------------------- */
 
 function rubricItem({ id, number, required, prompt, levels }) {
   return { type: "rubric", id, number, required, prompt, levels };
@@ -47,7 +47,7 @@ function cssEscape(s) {
 const SETTING_QUESTION = {
   type: "setting",
   id: "setting_context",
-  number: 1,
+  number: null, // unnumbered
   required: true,
   prompt: "What setting did you work with this student in?",
   options: [
@@ -57,6 +57,36 @@ const SETTING_QUESTION = {
   ]
 };
 
+/* -------------------- YOUR QUESTION BANKS -------------------- */
+/* Keep your BRANCH_QUESTIONS, SHARED_QUESTIONS, COMMENTS_BLOCK as-is */
+const BRANCH_QUESTIONS = { /* ... */ };
+const SHARED_QUESTIONS = [ /* ... */ ];
+const COMMENTS_BLOCK = [ /* ... */ ];
+
+/* -------------------- SURVEY BUILD -------------------- */
+
+function getSetting() {
+  return STATE.responses[SETTING_QUESTION.id] || "";
+}
+
+function buildSurvey(settingKey) {
+  if (!settingKey) {
+    return {
+      sections: [{ id: "setting", title: "Setting", items: [SETTING_QUESTION] }]
+    };
+  }
+
+  const branch = BRANCH_QUESTIONS[settingKey] || [];
+
+  // IMPORTANT: no +1 shifting. Your branch starts at 1 already.
+  return {
+    sections: [
+      { id: "setting", title: "Setting", items: [SETTING_QUESTION] },
+      { id: "core", title: "Evaluation", items: [...branch, ...SHARED_QUESTIONS] },
+      { id: "comments", title: "Comments", items: COMMENTS_BLOCK }
+    ]
+  };
+}
 /* -------------------- BRANCH QUESTIONS -------------------- */
 
 const BRANCH_QUESTIONS = {
@@ -612,71 +642,46 @@ const COMMENTS_BLOCK = [
   }
 ];
 
-/* -------------------- SURVEY BUILD -------------------- */
-
-function getSetting() {
-  return STATE.responses[SETTING_QUESTION.id] || "";
-}
-
-function buildSurvey(settingKey) {
-  if (!settingKey) {
-    return { sections: [{ id: "setting", title: "Setting", items: [SETTING_QUESTION] }] };
-  }
-
-  const branch = BRANCH_QUESTIONS[settingKey] || [];
-
-  const offsetNumber = (item) => {
-    if (!item.number) return item;
-    return { ...item, number: item.number + 1 };
-  };
-
-  return {
-    sections: [
-      { id: "setting", title: "Setting", items: [SETTING_QUESTION] },
-      { id: "core", title: "Evaluation", items: [...branch, ...SHARED_QUESTIONS].map(offsetNumber) },
-      { id: "comments", title: "Comments", items: COMMENTS_BLOCK.map(offsetNumber) }
-    ]
-  };
-}
-
 /* -------------------- RENDER -------------------- */
 
 const root = document.getElementById("surveyRoot");
-init();
 
 function init() {
+  wireButtons();
   renderSurvey(buildSurvey(getSetting()), root);
+}
 
-  document.getElementById("btnPrint").addEventListener("click", () => window.print());
-  document.getElementById("btnSave").addEventListener("click", () => {
-    const data = collectResponses(buildSurvey(getSetting()));
-    downloadJson(data, "survey_responses.json");
-  });
+function wireButtons() {
+  const btnPrint = document.getElementById("btnPrint");
+  if (btnPrint) btnPrint.addEventListener("click", () => window.print());
+
+  const btnSave = document.getElementById("btnSave");
+  if (btnSave) {
+    btnSave.addEventListener("click", () => {
+      const data = collectResponses(buildSurvey(getSetting()));
+      downloadJson(data, "survey_responses.json");
+    });
+  }
 }
 
 function onSettingChange(newSettingKey) {
   STATE.responses[SETTING_QUESTION.id] = newSettingKey;
 
-  // lock header once evaluation starts (sticky only after start)
+  // lock header once evaluation starts
   const header = document.querySelector(".ucla-spe-header");
   if (header) header.classList.add("is-sticky");
 
   renderSurvey(buildSurvey(newSettingKey), root);
 }
 
-/* -------------------- RENDERERS -------------------- */
-
 function renderSurvey(survey, mount) {
   mount.innerHTML = "";
 
   survey.sections.forEach((section) => {
-    const sectionWrap = document.createElement("div");
-    sectionWrap.className = "surveySection";
-
     const h = document.createElement("div");
     h.className = "sectionHeader";
     h.textContent = section.title;
-    sectionWrap.appendChild(h);
+    mount.appendChild(h);
 
     section.items.forEach((item) => {
       const card = document.createElement("section");
@@ -689,34 +694,25 @@ function renderSurvey(survey, mount) {
       const title = document.createElement("div");
       title.className = "qTitle";
       title.innerHTML =
-        `${item.number ? `${item.number}. ` : ""}${escapeHtml(item.prompt)}${item.required ? `<span class="qReq">*</span>` : ""}`;
+        `${item.number ? `${item.number}. ` : ""}${escapeHtml(item.prompt)}${
+          item.required ? `<span class="qReq">*</span>` : ""
+        }`;
 
       const meta = document.createElement("div");
       meta.className = "qMeta";
-      meta.textContent = section.title;
+      meta.textContent = section.title.toUpperCase();
 
       top.appendChild(title);
       top.appendChild(meta);
       card.appendChild(top);
 
-      if (item.type === "setting") {
-        card.appendChild(renderSetting(item));
-      } else if (item.type === "rubric") {
-        card.appendChild(renderRubric(item));
-      } else if (item.type === "textarea") {
-        card.appendChild(renderTextarea(item));
-      } else if (item.type === "yesno") {
-        card.appendChild(renderYesNo(item));
-      } else {
-        const p = document.createElement("div");
-        p.textContent = "Unsupported item type: " + item.type;
-        card.appendChild(p);
-      }
+      if (item.type === "setting") card.appendChild(renderSetting(item));
+      else if (item.type === "rubric") card.appendChild(renderRubric(item));
+      else if (item.type === "textarea") card.appendChild(renderTextarea(item));
+      else card.appendChild(document.createTextNode("Unsupported item type: " + item.type));
 
-      sectionWrap.appendChild(card);
+      mount.appendChild(card);
     });
-
-    mount.appendChild(sectionWrap);
   });
 }
 
@@ -767,10 +763,7 @@ function renderRubric(item) {
     input.name = name;
     input.value = lvl.key;
     input.checked = saved === String(lvl.key);
-
-    input.addEventListener("change", () => {
-      STATE.responses[name] = input.value;
-    });
+    input.addEventListener("change", () => (STATE.responses[name] = input.value));
 
     const text = document.createElement("div");
     text.className = "levelText";
@@ -778,7 +771,6 @@ function renderRubric(item) {
     const head = document.createElement("div");
     head.className = "levelHeadline";
     head.textContent = lvl.headline;
-
     text.appendChild(head);
 
     if (Array.isArray(lvl.bullets) && lvl.bullets.length) {
@@ -816,55 +808,9 @@ function renderTextarea(item) {
   ta.name = item.id;
   ta.placeholder = item.placeholder || "Type here...";
   ta.value = STATE.responses[item.id] || "";
-
-  ta.addEventListener("input", () => {
-    STATE.responses[item.id] = ta.value;
-  });
+  ta.addEventListener("input", () => (STATE.responses[item.id] = ta.value));
 
   wrap.appendChild(ta);
-  return wrap;
-}
-
-function renderYesNo(item) {
-  const wrap = document.createElement("div");
-  wrap.className = "freeText";
-
-  if (item.help) {
-    const help = document.createElement("div");
-    help.className = "fieldLabel";
-    help.textContent = item.help;
-    wrap.appendChild(help);
-  }
-
-  const row = document.createElement("div");
-  row.className = "inlineChoices";
-
-  const saved = STATE.responses[item.id] || "";
-
-  [
-    { v: "No", t: item.labels?.no ?? "No" },
-    { v: "Yes", t: item.labels?.yes ?? "Yes" }
-  ].forEach((opt) => {
-    const label = document.createElement("label");
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = item.id;
-    input.value = opt.v;
-    input.checked = saved === opt.v;
-
-    input.addEventListener("change", () => {
-      STATE.responses[item.id] = input.value;
-    });
-
-    const span = document.createElement("span");
-    span.textContent = opt.t;
-
-    label.appendChild(input);
-    label.appendChild(span);
-    row.appendChild(label);
-  });
-
-  wrap.appendChild(row);
   return wrap;
 }
 
@@ -873,7 +819,7 @@ function renderYesNo(item) {
 function collectResponses(survey) {
   survey.sections.forEach((section) => {
     section.items.forEach((item) => {
-      if (item.type === "rubric" || item.type === "setting" || item.type === "yesno") {
+      if (item.type === "rubric" || item.type === "setting") {
         const chosen = document.querySelector(`input[name="${cssEscape(item.id)}"]:checked`);
         if (chosen) STATE.responses[item.id] = chosen.value;
       } else if (item.type === "textarea") {
@@ -902,21 +848,6 @@ function downloadJson(obj, filename) {
   URL.revokeObjectURL(url);
 }
 
-/* -------------------- INIT BUTTONS (SAFE) -------------------- */
+init();
 
-function wireButtons() {
-  const btnPrint = document.getElementById("btnPrint");
-  if (btnPrint) btnPrint.addEventListener("click", () => window.print());
-
-  const btnSave = document.getElementById("btnSave");
-  if (btnSave) {
-    btnSave.addEventListener("click", () => {
-      const data = collectResponses(buildSurvey(getSetting()));
-      downloadJson(data, "survey_responses.json");
-    });
-  }
-}
-
-// run after DOM exists
-wireButtons();
 
