@@ -1,6 +1,14 @@
-const STATE = { responses: {} };
+/* =========================
+   GLOBAL STATE
+   ========================= */
 
-/* -------------------- BUILDERS -------------------- */
+const STATE = {
+  responses: {}
+};
+
+/* =========================
+   BUILDERS
+   ========================= */
 
 function rubricItem({ id, number, required, prompt, levels }) {
   return { type: "rubric", id, number, required, prompt, levels };
@@ -14,11 +22,16 @@ function level0() {
   return {
     key: "0",
     headline: "(0) N/A",
-    bullets: ["Insufficient contact or no observation", "Unable to evaluate fairly"]
+    bullets: [
+      "Insufficient contact or no observation",
+      "Unable to evaluate fairly"
+    ]
   };
 }
 
-/* -------------------- UTILS -------------------- */
+/* =========================
+   UTILS
+   ========================= */
 
 function escapeHtml(s) {
   return String(s)
@@ -33,7 +46,9 @@ function cssEscape(s) {
   return String(s).replaceAll('"', '\\"');
 }
 
-/* -------------------- SETTING QUESTION -------------------- */
+/* =========================
+   SETTING QUESTION (ALWAYS FIRST)
+   ========================= */
 
 const SETTING_QUESTION = {
   type: "setting",
@@ -47,6 +62,60 @@ const SETTING_QUESTION = {
     { key: "SURGERY", label: "Surgery" }
   ]
 };
+
+/* =========================
+   SURVEY BUILD
+   ========================= */
+
+function getSetting() {
+  return STATE.responses[SETTING_QUESTION.id] || "";
+}
+
+function buildSurvey(settingKey) {
+  // Before setting chosen → ONLY show setting question
+  if (!settingKey) {
+    return {
+      sections: [
+        {
+          id: "setting",
+          title: "Setting",
+          items: [SETTING_QUESTION]
+        }
+      ]
+    };
+  }
+
+  const branchItems = BRANCH_QUESTIONS[settingKey] || [];
+
+  return {
+    sections: [
+      {
+        id: "setting",
+        title: "Setting",
+        items: [SETTING_QUESTION]
+      },
+      {
+        id: "evaluation",
+        title: "Evaluation",
+        items: [...branchItems, ...SHARED_QUESTIONS]
+      },
+      {
+        id: "comments",
+        title: "Comments",
+        items: COMMENTS_BLOCK
+      }
+    ]
+  };
+}
+/* =========================
+   QUESTION BANKS
+   (BRANCH_QUESTIONS, SHARED_QUESTIONS, COMMENTS_BLOCK)
+   ========================= */
+
+// your BRANCH_QUESTIONS object
+// your SHARED_QUESTIONS array
+// your COMMENTS_BLOCK array
+
 /* -------------------- BRANCH QUESTIONS -------------------- */
 
 const BRANCH_QUESTIONS = {
@@ -601,58 +670,59 @@ const COMMENTS_BLOCK = [
       "In the official evaluation, faculty comments would appear here in paragraph form."
   }
 ];
-/* -------------------- RENDER -------------------- */
+
+/* =========================
+   RENDER PIPELINE
+   ========================= */
 
 let root = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   root = document.getElementById("surveyRoot");
   if (!root) {
-    console.error('Missing element: <div id="surveyRoot"></div>');
+    console.error('Missing <div id="surveyRoot"></div>');
     return;
   }
-  wireButtons();
+
   renderSurvey(buildSurvey(getSetting()), root);
 });
 
-function onSettingChange(newSettingKey) {
-  STATE.responses[SETTING_QUESTION.id] = newSettingKey;
-  renderSurvey(buildSurvey(newSettingKey), root);
+function onSettingChange(newSetting) {
+  STATE.responses[SETTING_QUESTION.id] = newSetting;
+  renderSurvey(buildSurvey(newSetting), root);
 }
 
 function renderSurvey(survey, mount) {
   mount.innerHTML = "";
 
-  // Optional wrapper class for layout
-  mount.classList.add("surveyRoot");
-
   survey.sections.forEach((section) => {
     const sectionWrap = document.createElement("div");
     sectionWrap.className = "surveySection";
 
-    const h = document.createElement("div");
-    h.className = "sectionHeader";
-    h.textContent = section.title;
-    sectionWrap.appendChild(h);
+    const header = document.createElement("div");
+    header.className = "sectionHeader";
+    header.textContent = section.title;
+    sectionWrap.appendChild(header);
 
     section.items.forEach((item) => {
       const card = document.createElement("section");
       card.className = "questionCard";
-      card.dataset.qid = item.id;
 
       const top = document.createElement("div");
       top.className = "qTop";
 
       const isSetting = item.type === "setting";
       const displayNumber =
-        !isSetting && typeof item.number === "number" ? item.number : null;
+        !isSetting && typeof item.number === "number"
+          ? item.number + 1
+          : null;
 
       const title = document.createElement("div");
       title.className = "qTitle";
       title.innerHTML =
-        `${displayNumber ? `${displayNumber}. ` : ""}` +
+        `${displayNumber ? displayNumber + ". " : ""}` +
         `${escapeHtml(item.prompt)}` +
-        `${item.required ? `<span class="qReq">*</span>` : ""}`;
+        `${item.required ? '<span class="qReq">*</span>' : ""}`;
 
       const meta = document.createElement("div");
       meta.className = "qMeta";
@@ -662,13 +732,12 @@ function renderSurvey(survey, mount) {
       top.appendChild(meta);
       card.appendChild(top);
 
-      if (item.type === "setting") card.appendChild(renderSetting(item));
-      else if (item.type === "rubric") card.appendChild(renderRubric(item));
-      else if (item.type === "textarea") card.appendChild(renderTextarea(item));
-      else {
-        const p = document.createElement("div");
-        p.textContent = "Unsupported item type: " + item.type;
-        card.appendChild(p);
+      if (item.type === "setting") {
+        card.appendChild(renderSetting(item));
+      } else if (item.type === "rubric") {
+        card.appendChild(renderRubric(item));
+      } else if (item.type === "textarea") {
+        card.appendChild(renderTextarea(item));
       }
 
       sectionWrap.appendChild(card);
@@ -676,159 +745,5 @@ function renderSurvey(survey, mount) {
 
     mount.appendChild(sectionWrap);
   });
-}
-
-/* -------------------- ITEM RENDERERS -------------------- */
-
-function renderSetting(item) {
-  const wrap = document.createElement("div");
-  wrap.className = "freeText";
-
-  const row = document.createElement("div");
-  row.className = "inlineChoices";
-
-  item.options.forEach((opt) => {
-    const label = document.createElement("label");
-
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = item.id;
-    input.value = opt.key;
-    input.checked = STATE.responses[item.id] === opt.key;
-    input.addEventListener("change", () => onSettingChange(opt.key));
-
-    const span = document.createElement("span");
-    span.textContent = opt.label;
-
-    label.appendChild(input);
-    label.appendChild(span);
-    row.appendChild(label);
-  });
-
-  wrap.appendChild(row);
-  return wrap;
-}
-
-function renderRubric(item) {
-  const wrap = document.createElement("div");
-  wrap.className = "levels";
-
-  const name = item.id;
-  const saved = STATE.responses[name] || "";
-
-  item.levels.forEach((lvl) => {
-    const box = document.createElement("div");
-    box.className = "levelBox";
-
-    const label = document.createElement("label");
-    label.className = "levelLabel";
-
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = name;
-    input.value = lvl.key;
-    input.checked = saved === String(lvl.key);
-    input.addEventListener("change", () => (STATE.responses[name] = input.value));
-
-    const text = document.createElement("div");
-    text.className = "levelText";
-
-    const head = document.createElement("div");
-    head.className = "levelHeadline";
-    head.textContent = lvl.headline;
-    text.appendChild(head);
-
-    if (Array.isArray(lvl.bullets) && lvl.bullets.length) {
-      const ul = document.createElement("ul");
-      ul.className = "bullets";
-      lvl.bullets.forEach((b) => {
-        const li = document.createElement("li");
-        li.textContent = b;
-        ul.appendChild(li);
-      });
-      text.appendChild(ul);
-    }
-
-    label.appendChild(input);
-    label.appendChild(text);
-    box.appendChild(label);
-    wrap.appendChild(box);
-  });
-
-  return wrap;
-}
-
-function renderTextarea(item) {
-  const wrap = document.createElement("div");
-  wrap.className = "freeText";
-
-  if (item.help) {
-    const help = document.createElement("div");
-    help.className = "fieldLabel";
-    help.textContent = item.help;
-    wrap.appendChild(help);
-  }
-
-  const ta = document.createElement("textarea");
-  ta.name = item.id;
-  ta.placeholder = item.placeholder || "Type here...";
-  ta.value = STATE.responses[item.id] || "";
-  ta.addEventListener("input", () => (STATE.responses[item.id] = ta.value));
-
-  wrap.appendChild(ta);
-  return wrap;
-}
-
-/* -------------------- COLLECT + EXPORT -------------------- */
-
-function collectResponses(survey) {
-  survey.sections.forEach((section) => {
-    section.items.forEach((item) => {
-      if (item.type === "rubric" || item.type === "setting") {
-        const chosen = document.querySelector(
-          `input[name="${cssEscape(item.id)}"]:checked`
-        );
-        if (chosen) STATE.responses[item.id] = chosen.value;
-      } else if (item.type === "textarea") {
-        const ta = document.querySelector(`textarea[name="${cssEscape(item.id)}"]`);
-        if (ta) STATE.responses[item.id] = ta.value;
-      }
-    });
-  });
-
-  return {
-    collectedAt: new Date().toISOString(),
-    setting: STATE.responses[SETTING_QUESTION.id] || "",
-    responses: { ...STATE.responses }
-  };
-}
-
-function downloadJson(obj, filename) {
-  const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  URL.revokeObjectURL(url);
-}
-
-/* -------------------- BUTTONS -------------------- */
-
-function wireButtons() {
-  const btnPrint = document.getElementById("btnPrint");
-  if (btnPrint) btnPrint.addEventListener("click", () => window.print());
-
-  const btnSave = document.getElementById("btnSave");
-  if (btnSave) {
-    btnSave.addEventListener("click", () => {
-      const data = collectResponses(buildSurvey(getSetting()));
-      downloadJson(data, "survey_responses.json");
-    });
-  }
 }
 
