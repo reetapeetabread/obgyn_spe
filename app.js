@@ -4,15 +4,50 @@
  * - NOTHING else renders until setting chosen
  * - Q2–Q? shifts automatically (adds +1 to numbered questions)
  * - Rubric choices 0–4 are vertical via CSS
- * - Comments section is a disabled placeholder (no real collection)
+ * - Comments section is a placeholder
  */
 
 const STATE = { responses: {} };
 
+/* -------------------- BUILDERS (define early) -------------------- */
+
+function rubricItem({ id, number, required, prompt, levels }) {
+  return { type: "rubric", id, number, required, prompt, levels };
+}
+
+function level(score, label, bullets) {
+  return { key: String(score), headline: `(${score}) ${label}`, bullets };
+}
+
+function level0() {
+  return {
+    key: "0",
+    headline: "(0) N/A",
+    bullets: ["Insufficient contact or no observation", "Unable to evaluate fairly"]
+  };
+}
+
+/* -------------------- UTILS -------------------- */
+
+function escapeHtml(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function cssEscape(s) {
+  return String(s).replaceAll('"', '\\"');
+}
+
+/* -------------------- DATA -------------------- */
+
 const SETTING_QUESTION = {
   type: "setting",
   id: "setting_context",
-  number: 1, // Q1
+  number: 1,
   required: true,
   prompt: "What setting did you work with this student in?",
   options: [
@@ -22,7 +57,7 @@ const SETTING_QUESTION = {
   ]
 };
 
-/* -------------------- BRANCH QUESTIONS (setting-specific) -------------------- */
+/* -------------------- BRANCH QUESTIONS -------------------- */
 
 const BRANCH_QUESTIONS = {
   INPATIENT: [
@@ -55,7 +90,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q2_clinical_reasoning",
       number: 2,
@@ -85,7 +119,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q3_management_treatment",
       number: 3,
@@ -115,7 +148,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q4_presentations_documentation",
       number: 4,
@@ -177,7 +209,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q2_clinical_reasoning",
       number: 2,
@@ -207,7 +238,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q3_management_followup",
       number: 3,
@@ -237,7 +267,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q4_presentations_documentation",
       number: 4,
@@ -299,7 +328,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q2_fund_of_knowledge",
       number: 2,
@@ -329,7 +357,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q3_perioperative_support",
       number: 3,
@@ -359,7 +386,6 @@ const BRANCH_QUESTIONS = {
         ])
       ]
     }),
-
     rubricItem({
       id: "q4_intraop_technique",
       number: 4,
@@ -392,8 +418,6 @@ const BRANCH_QUESTIONS = {
   ]
 };
 
-/* -------------------- SHARED QUESTIONS (same across settings) -------------------- */
-
 const SHARED_QUESTIONS = [
   rubricItem({
     id: "q5_patient_family_communication",
@@ -424,7 +448,6 @@ const SHARED_QUESTIONS = [
       ])
     ]
   }),
-
   rubricItem({
     id: "q6_team_communication",
     number: 6,
@@ -454,7 +477,6 @@ const SHARED_QUESTIONS = [
       ])
     ]
   }),
-
   rubricItem({
     id: "q7_humanism",
     number: 7,
@@ -484,7 +506,6 @@ const SHARED_QUESTIONS = [
       ])
     ]
   }),
-
   rubricItem({
     id: "q8_integrity_work_ethic",
     number: 8,
@@ -514,7 +535,6 @@ const SHARED_QUESTIONS = [
       ])
     ]
   }),
-
   rubricItem({
     id: "q9_commitment_learning",
     number: 9,
@@ -544,8 +564,6 @@ const SHARED_QUESTIONS = [
       ])
     ]
   }),
-
-  // Your second "Q9 Coordination of Care" implemented as Q10 to avoid duplicate numbering
   rubricItem({
     id: "q10_coordination_of_care",
     number: 10,
@@ -577,8 +595,6 @@ const SHARED_QUESTIONS = [
   })
 ];
 
-/* -------------------- COMMENTS PLACEHOLDER (ONLY) -------------------- */
-
 const COMMENTS_BLOCK = [
   {
     type: "textarea",
@@ -603,18 +619,12 @@ function getSetting() {
 }
 
 function buildSurvey(settingKey) {
-  // Nothing loads until setting chosen
   if (!settingKey) {
-    return {
-      sections: [
-        { id: "setting", title: "Setting", items: [SETTING_QUESTION] }
-      ]
-    };
+    return { sections: [{ id: "setting", title: "Setting", items: [SETTING_QUESTION] }] };
   }
 
   const branch = BRANCH_QUESTIONS[settingKey] || [];
 
-  // Shift numbering by +1 so setting is Q1 and the rest becomes Q2+
   const offsetNumber = (item) => {
     if (!item.number) return item;
     return { ...item, number: item.number + 1 };
@@ -623,16 +633,8 @@ function buildSurvey(settingKey) {
   return {
     sections: [
       { id: "setting", title: "Setting", items: [SETTING_QUESTION] },
-      {
-        id: "core",
-        title: "Evaluation",
-        items: [...branch, ...SHARED_QUESTIONS].map(offsetNumber)
-      },
-      {
-        id: "comments",
-        title: "Comments",
-        items: COMMENTS_BLOCK.map(offsetNumber)
-      }
+      { id: "core", title: "Evaluation", items: [...branch, ...SHARED_QUESTIONS].map(offsetNumber) },
+      { id: "comments", title: "Comments", items: COMMENTS_BLOCK.map(offsetNumber) }
     ]
   };
 }
@@ -640,14 +642,11 @@ function buildSurvey(settingKey) {
 /* -------------------- RENDER -------------------- */
 
 const root = document.getElementById("surveyRoot");
-
 init();
 
 function init() {
-  // initial render with no setting chosen yet
   renderSurvey(buildSurvey(getSetting()), root);
 
-  // hook up buttons
   document.getElementById("btnPrint").addEventListener("click", () => window.print());
   document.getElementById("btnSave").addEventListener("click", () => {
     const data = collectResponses(buildSurvey(getSetting()));
@@ -655,16 +654,20 @@ function init() {
   });
 }
 
-function getSetting() {
-  return STATE.responses[SETTING_QUESTION.id] || "";
-}
-
 function onSettingChange(newSettingKey) {
   STATE.responses[SETTING_QUESTION.id] = newSettingKey;
+
+  // lock header once evaluation starts (sticky only after start)
+  const header = document.querySelector(".ucla-spe-header");
+  if (header) header.classList.add("is-sticky");
+
   renderSurvey(buildSurvey(newSettingKey), root);
 }
 
+/* -------------------- RENDERERS -------------------- */
+
 function renderSurvey(survey, mount) {
+  if (!mount) return;
   mount.innerHTML = "";
 
   survey.sections.forEach((section) => {
@@ -694,15 +697,11 @@ function renderSurvey(survey, mount) {
       top.appendChild(meta);
       card.appendChild(top);
 
-      if (item.type === "setting") {
-        card.appendChild(renderSetting(item));
-      } else if (item.type === "rubric") {
-        card.appendChild(renderRubric(item));
-      } else if (item.type === "textarea") {
-        card.appendChild(renderTextarea(item));
-      } else if (item.type === "yesno") {
-        card.appendChild(renderYesNo(item));
-      } else {
+      if (item.type === "setting") card.appendChild(renderSetting(item));
+      else if (item.type === "rubric") card.appendChild(renderRubric(item));
+      else if (item.type === "textarea") card.appendChild(renderTextarea(item));
+      else if (item.type === "yesno") card.appendChild(renderYesNo(item));
+      else {
         const p = document.createElement("div");
         p.textContent = "Unsupported item type: " + item.type;
         card.appendChild(p);
@@ -727,7 +726,6 @@ function renderSetting(item) {
     input.name = item.id;
     input.value = opt.key;
     input.checked = STATE.responses[item.id] === opt.key;
-
     input.addEventListener("change", () => onSettingChange(opt.key));
 
     const span = document.createElement("span");
@@ -808,7 +806,7 @@ function renderTextarea(item) {
 
   const ta = document.createElement("textarea");
   ta.name = item.id;
-  ta.placeholder = "Type here...";
+  ta.placeholder = item.placeholder || "Type here...";
   ta.value = STATE.responses[item.id] || "";
 
   ta.addEventListener("input", () => {
@@ -835,7 +833,10 @@ function renderYesNo(item) {
 
   const saved = STATE.responses[item.id] || "";
 
-  [ { v: "No", t: item.labels?.no ?? "No" }, { v: "Yes", t: item.labels?.yes ?? "Yes" } ].forEach((opt) => {
+  [
+    { v: "No", t: item.labels?.no ?? "No" },
+    { v: "Yes", t: item.labels?.yes ?? "Yes" }
+  ].forEach((opt) => {
     const label = document.createElement("label");
     const input = document.createElement("input");
     input.type = "radio";
@@ -862,7 +863,6 @@ function renderYesNo(item) {
 /* -------------------- COLLECT + EXPORT -------------------- */
 
 function collectResponses(survey) {
-  // Ensure latest DOM values are saved (defensive)
   survey.sections.forEach((section) => {
     section.items.forEach((item) => {
       if (item.type === "rubric" || item.type === "setting" || item.type === "yesno") {
@@ -894,36 +894,20 @@ function downloadJson(obj, filename) {
   URL.revokeObjectURL(url);
 }
 
-/* -------------------- BUILDERS -------------------- */
+/* -------------------- INIT BUTTONS (SAFE) -------------------- */
 
-function rubricItem({ id, number, required, prompt, levels }) {
-  return { type: "rubric", id, number, required, prompt, levels };
+function wireButtons() {
+  const btnPrint = document.getElementById("btnPrint");
+  if (btnPrint) btnPrint.addEventListener("click", () => window.print());
+
+  const btnSave = document.getElementById("btnSave");
+  if (btnSave) {
+    btnSave.addEventListener("click", () => {
+      const data = collectResponses(buildSurvey(getSetting()));
+      downloadJson(data, "survey_responses.json");
+    });
+  }
 }
 
-function level(score, label, bullets) {
-  return { key: String(score), headline: `(${score}) ${label}`, bullets };
-}
-
-function level0() {
-  return {
-    key: "0",
-    headline: "(0) N/A",
-    bullets: ["Insufficient contact or no observation", "Unable to evaluate fairly"]
-  };
-}
-
-/* -------------------- UTILS -------------------- */
-
-function escapeHtml(s) {
-  return String(s)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function cssEscape(s) {
-  return String(s).replaceAll('"', '\\"');
-}
-
+// run after DOM exists
+wireButtons();
