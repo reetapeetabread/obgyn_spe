@@ -1,12 +1,30 @@
+/* =========================
+   CLEAN UCLA-ADMIN INSPIRED
+   ========================= */
+
 /* Base page styling */
 :root {
-  /* UCLA-ish blues and borders (admin UI look) */
-  --ucla-blue-1: #2f6f9f;
-  --ucla-blue-2: #cfe0f1; /* header band */
-  --ucla-blue-3: #e7f0f9; /* panel background */
-  --ucla-blue-4: #b7cbe0; /* border */
-  --ucla-blue-5: #d9e7f5; /* lighter band */
-  --text: #111;
+  /* More restrained palette */
+  --ucla-navy: #0f4c81;
+  --ucla-blue: #2f6f9f;
+
+  --panel: #ffffff;
+  --panel-tint: #f6f9fc;
+
+  --border: #d5dee8;
+  --border-strong: #c2cfdd;
+
+  --band: #eef4fb;
+  --band-strong: #e2ecf7;
+
+  --text: #0f172a;
+  --muted: #475569;
+
+  --shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+  --shadow-sticky: 0 6px 18px rgba(15, 23, 42, 0.10);
+
+  --radius: 10px;
+  --radius-sm: 8px;
 }
 
 * {
@@ -20,9 +38,14 @@ body {
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
   color: var(--text);
-  background: #fff;
+  background: #ffffff;
+
+  /* Cleaner default font */
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .page {
@@ -33,34 +56,38 @@ body {
 
 /* Existing topbar */
 .topbar {
-  background: var(--ucla-blue-1);
+  background: var(--ucla-navy);
   color: #fff;
-  padding: 10px 14px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .brand-title {
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.1;
+  font-weight: 650;
+  font-size: 15px;
+  line-height: 1.15;
+  letter-spacing: 0.2px;
 }
 
 .brand-sub {
   font-size: 12px;
-  opacity: 0.9;
+  opacity: 0.92;
   margin-top: 2px;
 }
 
 .content {
-  padding: 12px 14px 24px;
+  padding: 14px 16px 26px;
   flex: 1;
+  background: #ffffff;
 }
 
 /* Footer */
 .footer {
-  border-top: 1px solid #ddd;
-  padding: 10px 14px;
+  border-top: 1px solid #e5e7eb;
+  padding: 10px 16px;
   font-size: 12px;
-  background: #fafafa;
+  background: #fbfbfc;
+  color: var(--muted);
 }
 
 .footer-note {
@@ -68,14 +95,20 @@ body {
 }
 
 .footer-meta {
-  color: #666;
+  color: #64748b;
 }
 
-/* UCLA-style SPE header */
+/* =========================
+   UCLA-style SPE header
+   ========================= */
+
 .ucla-spe-header {
-  border: 1px solid var(--ucla-blue-4);
-  background: var(--ucla-blue-3);
-  margin-bottom: 10px; /* tight like the screenshot */
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  overflow: hidden; /* keeps rounded corners clean */
 }
 
 /* Sticky lock behavior */
@@ -83,68 +116,73 @@ body {
   position: sticky;
   top: 0;
   z-index: 20;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sticky);
 }
 
 /* Title band */
 .ucla-spe-titlebar {
-  background: var(--ucla-blue-2);
-  border-bottom: 1px solid var(--ucla-blue-4);
-  padding: 6px 8px;
+  background: linear-gradient(180deg, var(--band-strong), var(--band));
+  border-bottom: 1px solid var(--border);
+  padding: 10px 12px;
 }
 
 .ucla-spe-title {
   font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.1px;
+  font-size: 16px;
+  letter-spacing: 0.2px;
 }
 
 /* Body */
 .ucla-spe-body {
-  padding: 8px;
+  padding: 12px;
+  background: var(--panel);
 }
 
 .ucla-spe-grid {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 10px;
+  grid-template-columns: 128px 1fr;
+  gap: 12px;
   align-items: start;
 }
 
 /* Photo block */
 .ucla-spe-photo {
-  width: 140px;
-  height: 175px;
-  border: 1px solid var(--ucla-blue-4);
-  background: #fff;
+  width: 128px;
+  height: 164px;
+  border: 1px solid var(--border);
+  background: var(--panel-tint);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .ucla-spe-photo-inner {
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  border: 1px solid var(--ucla-blue-4);
-  background: #f3f7fb;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  border: 1px dashed var(--border-strong);
+  background: #ffffff;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  color: #666;
-  letter-spacing: 0.8px;
+  color: #64748b;
+  letter-spacing: 0.6px;
 }
 
 /* Meta rows mimic table rows */
 .ucla-spe-meta {
-  border: 1px solid var(--ucla-blue-4);
-  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  overflow: hidden;
 }
 
 .ucla-spe-row {
   display: grid;
-  grid-template-columns: 165px 1fr;
-  border-bottom: 1px solid var(--ucla-blue-4);
+  grid-template-columns: 170px 1fr;
+  border-bottom: 1px solid var(--border);
 }
 
 .ucla-spe-row:last-child {
@@ -152,24 +190,27 @@ body {
 }
 
 .ucla-spe-cell {
-  padding: 6px 8px; /* tight */
+  padding: 8px 10px;
   font-size: 13px;
-  line-height: 1.25;
+  line-height: 1.35;
 }
 
 .ucla-spe-cell-label {
-  background: var(--ucla-blue-5);
-  font-weight: 700;
-  border-right: 1px solid var(--ucla-blue-4);
+  background: var(--panel-tint);
+  font-weight: 650;
+  color: #0b2b46;
+  border-right: 1px solid var(--border);
 }
 
 .ucla-spe-cell-value {
-  background: #fff;
+  background: #ffffff;
+  color: var(--text);
 }
 
 .ucla-spe-meta-label {
-  font-weight: 700;
+  font-weight: 650;
   margin-left: 10px;
+  color: #0b2b46;
 }
 
 .ucla-spe-meta-spacer {
@@ -178,8 +219,9 @@ body {
 }
 
 .ucla-spe-linklike {
-  color: #1a4f7a;
+  color: var(--ucla-blue);
   text-decoration: underline;
+  text-underline-offset: 2px;
   cursor: default;
 }
 
@@ -189,40 +231,44 @@ body {
 }
 
 .ucla-spe-course-title {
-  background: var(--ucla-blue-2);
-  border-top: 1px solid var(--ucla-blue-4);
-  border-bottom: 1px solid var(--ucla-blue-4);
-  padding: 6px 8px;
-  font-weight: 700;
+  background: linear-gradient(180deg, var(--band-strong), var(--band));
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 10px;
+  font-weight: 750;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
+  color: #0b2b46;
 }
 
+/* Table */
 .ucla-spe-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .ucla-spe-table th,
 .ucla-spe-table td {
-  border: 1px solid var(--ucla-blue-4);
-  padding: 6px 8px;
+  border: 1px solid var(--border);
+  padding: 8px 10px;
   text-align: left;
   vertical-align: top;
 }
 
 .ucla-spe-table th {
-  background: var(--ucla-blue-5);
+  background: #f3f7fc;
   font-weight: 700;
+  color: #0b2b46;
 }
 
 /* Evaluation period band */
 .ucla-spe-period {
-  background: var(--ucla-blue-2);
-  border-top: 1px solid var(--ucla-blue-4);
-  padding: 6px 8px;
-  font-size: 13px;
+  background: #f3f7fc;
+  border-top: 1px solid var(--border);
+  padding: 8px 10px;
+  font-size: 12.5px;
+  color: #0b2b46;
 }
 
 .ucla-spe-period-label {
@@ -231,20 +277,26 @@ body {
 
 .ucla-spe-period-value {
   margin-left: 6px;
+  color: #0f172a;
 }
 
-/* Make sticky header behave nicely on small screens */
+/* Small screens */
 @media (max-width: 700px) {
+  .content {
+    padding: 12px 12px 22px;
+  }
+
   .ucla-spe-grid {
     grid-template-columns: 1fr;
   }
 
   .ucla-spe-photo {
     width: 100%;
-    height: 200px;
+    height: 180px;
   }
 
   .ucla-spe-row {
-    grid-template-columns: 130px 1fr;
+    grid-template-columns: 140px 1fr;
   }
 }
+
