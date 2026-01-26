@@ -673,11 +673,18 @@ function onSettingChange(newSettingKey) {
 function renderSurvey(survey, mount) {
   mount.innerHTML = "";
 
+  // Ensure surveyRoot spacing is active even if CSS misses it
+  mount.classList.add("surveyRoot");
+
   survey.sections.forEach((section) => {
+    // Optional wrapper per section (cleaner spacing)
+    const sectionWrap = document.createElement("div");
+    sectionWrap.className = "surveySection";
+
     const h = document.createElement("div");
     h.className = "sectionHeader";
     h.textContent = section.title;
-    mount.appendChild(h);
+    sectionWrap.appendChild(h);
 
     section.items.forEach((item) => {
       const card = document.createElement("section");
@@ -687,12 +694,19 @@ function renderSurvey(survey, mount) {
       const top = document.createElement("div");
       top.className = "qTop";
 
+      // Renumbering rule:
+      // - Setting question: no number
+      // - Everything else: start at 2 (so item.number 1 -> 2, 2 -> 3, etc.)
+      const isSetting = item.type === "setting";
+      const displayNumber =
+        !isSetting && typeof item.number === "number" ? item.number + 1 : null;
+
       const title = document.createElement("div");
       title.className = "qTitle";
       title.innerHTML =
-        `${item.number ? `${item.number}. ` : ""}${escapeHtml(item.prompt)}${
-          item.required ? `<span class="qReq">*</span>` : ""
-        }`;
+        `${displayNumber ? `${displayNumber}. ` : ""}` +
+        `${escapeHtml(item.prompt)}` +
+        `${item.required ? `<span class="qReq">*</span>` : ""}`;
 
       const meta = document.createElement("div");
       meta.className = "qMeta";
@@ -705,10 +719,16 @@ function renderSurvey(survey, mount) {
       if (item.type === "setting") card.appendChild(renderSetting(item));
       else if (item.type === "rubric") card.appendChild(renderRubric(item));
       else if (item.type === "textarea") card.appendChild(renderTextarea(item));
-      else card.appendChild(document.createTextNode("Unsupported item type: " + item.type));
+      else {
+        const p = document.createElement("div");
+        p.textContent = "Unsupported item type: " + item.type;
+        card.appendChild(p);
+      }
 
-      mount.appendChild(card);
+      sectionWrap.appendChild(card);
     });
+
+    mount.appendChild(sectionWrap);
   });
 }
 
