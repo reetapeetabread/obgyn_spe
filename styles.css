@@ -435,4 +435,189 @@ textarea{
   .ucla-spe-header{
     box-shadow:none;
   }
+  /* ===== SURVEY: modern cards (paste at end of styles.css) ===== */
+
+#surveyRoot{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
 }
+
+/* Section wrapper */
+.surveySection{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* "Setting / Evaluation / Comments" header */
+.sectionHeader{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+  color: #0b2b46;
+  padding: 10px 12px;
+  border: 1px solid #d5dee8;
+  background: linear-gradient(180deg, #e9f2fb, #f3f7fc);
+  border-radius: 10px;
+}
+
+/* Card */
+.questionCard{
+  border: 1px solid #d5dee8;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(15,23,42,.06);
+  padding: 12px 12px 12px;
+}
+
+/* Card header row */
+.qTop{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #2b6cb0;
+}
+
+.qTitle{
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0f172a;
+}
+
+.qReq{
+  color: #b91c1c;
+  font-weight: 900;
+  margin-left: 4px;
+}
+
+.qMeta{
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: #0b2b46;
+  background: #f3f7fc;
+  border: 1px solid #d5dee8;
+  border-radius: 999px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* Choice row (Setting / Yes-No) */
+.inlineChoices{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inlineChoices label{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d5dee8;
+  background: #ffffff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+
+.inlineChoices label:hover{
+  background: #f8fafc;
+  border-color: #c2cfdd;
+  box-shadow: 0 1px 10px rgba(15,23,42,.06);
+}
+
+.inlineChoices input[type="radio"]{
+  width: 16px;
+  height: 16px;
+  accent-color: #2b6cb0;
+}
+
+/* Rubric stack */
+.levels{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.levelBox{
+  border: 1px solid #d5dee8;
+  background: #f6f9fc;
+  border-radius: 10px;
+  padding: 10px 10px;
+  transition: border-color .12s ease, box-shadow .12s ease;
+}
+
+.levelBox:hover{
+  border-color: #c2cfdd;
+  box-shadow: 0 2px 12px rgba(15,23,42,.08);
+}
+
+.levelLabel{
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.levelLabel input{
+  margin-top: 3px;
+  accent-color: #2b6cb0;
+}
+
+.levelHeadline{
+  font-weight: 900;
+  font-size: 13px;
+  color: #0b2b46;
+  margin-bottom: 6px;
+}
+
+ul.bullets{
+  margin: 0;
+  padding-left: 18px;
+  color: #334155;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+ul.bullets li{
+  margin: 3px 0;
+}
+
+/* Textarea */
+.fieldLabel{
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+textarea{
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #d5dee8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+  background: #f8fafc;
+  outline: none;
+}
+
+textarea:focus{
+  border-color: #93b7d6;
+  box-shadow: 0 0 0 3px rgba(43,108,176,.14);
+} }
+  
