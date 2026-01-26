@@ -1,515 +1,451 @@
 /* =========================
-   CLEAN UCLA-ADMIN INSPIRED
+   UCLA + CLEAN SURVEY UI
+   Full styles.css (drop-in)
    ========================= */
 
-/* Base page styling */
-:root {
-  /* More restrained palette */
-  --ucla-navy: #0f4c81;
-  --ucla-blue: #2f6f9f;
+:root{
+  /* Header palette (UCLA-ish) */
+  --ucla-navy:#0f4c81;
+  --ucla-blue:#2f6f9f;
 
-  --panel: #ffffff;
-  --panel-tint: #f6f9fc;
+  /* Survey palette (clean admin) */
+  --ink:#111827;
+  --muted:#5a5a5a;
+  --line:#cfd8e3;
+  --blue:#2b6cb0;
 
-  --border: #d5dee8;
-  --border-strong: #c2cfdd;
+  --panel:#f3f4f6;
+  --panel2:#f8fafc;
 
-  --band: #eef4fb;
-  --band-strong: #e2ecf7;
+  --border:#d1d5db;
 
-  --text: #0f172a;
-  --muted: #475569;
+  --shadow: 0 1px 0 rgba(0,0,0,.04);
+  --shadow2: 0 2px 10px rgba(15,23,42,.06);
 
-  --shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
-  --shadow-sticky: 0 6px 18px rgba(15, 23, 42, 0.10);
-
-  --radius: 10px;
-  --radius-sm: 8px;
+  --radius:10px;
+  --radius-sm:8px;
 }
 
-* {
-  box-sizing: border-box;
-}
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  color: var(--text);
-  background: #ffffff;
-
-  /* Cleaner default font */
+body{
+  margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
     "Apple Color Emoji", "Segoe UI Emoji";
+  color:var(--ink);
+  background:#ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.page {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Existing topbar */
-.topbar {
-  background: var(--ucla-navy);
-  color: #fff;
-  padding: 10px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.brand-title {
-  font-weight: 650;
-  font-size: 15px;
-  line-height: 1.15;
-  letter-spacing: 0.2px;
-}
-
-.brand-sub {
-  font-size: 12px;
-  opacity: 0.92;
-  margin-top: 2px;
-}
-
-.content {
-  padding: 14px 16px 26px;
-  flex: 1;
-  background: #ffffff;
-}
-
-/* Footer */
-.footer {
-  border-top: 1px solid #e5e7eb;
-  padding: 10px 16px;
-  font-size: 12px;
-  background: #fbfbfc;
-  color: var(--muted);
-}
-
-.footer-note {
-  margin-bottom: 6px;
-}
-
-.footer-meta {
-  color: #64748b;
+.page{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
 }
 
 /* =========================
-   UCLA-style SPE header
+   TOPBAR
    ========================= */
-
-.ucla-spe-header {
-  border: 1px solid var(--border);
-  background: var(--panel);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 12px;
-  overflow: hidden; /* keeps rounded corners clean */
+.topbar{
+  background: var(--ucla-navy);
+  color:#fff;
+  padding:10px 16px;
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-/* Sticky lock behavior */
-.ucla-spe-header.is-sticky {
+.brand-title{
+  font-weight:700;
+  font-size:15px;
+  line-height:1.15;
+  letter-spacing:.2px;
+}
+
+.brand-sub{
+  margin-top:2px;
+  font-size:12px;
+  opacity:.92;
+}
+
+.content{
+  padding:14px 16px 26px;
+  flex:1;
+  background:#ffffff;
+}
+
+/* =========================
+   UCLA HEADER (student/course block)
+   ========================= */
+.ucla-spe-header{
+  border:1px solid var(--line);
+  background:#ffffff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow2);
+  margin-bottom:14px;
+  overflow:hidden;
+}
+
+.ucla-spe-header.is-sticky{
   position: sticky;
   top: 0;
   z-index: 20;
-  box-shadow: var(--shadow-sticky);
+  box-shadow: 0 6px 18px rgba(15,23,42,.10);
 }
 
-/* Title band */
-.ucla-spe-titlebar {
-  background: linear-gradient(180deg, var(--band-strong), var(--band));
-  border-bottom: 1px solid var(--border);
-  padding: 10px 12px;
+.ucla-spe-titlebar{
+  background: linear-gradient(180deg, #e9f2fb, #f3f7fc);
+  border-bottom:1px solid var(--line);
+  padding:10px 12px;
 }
 
-.ucla-spe-title {
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.2px;
+.ucla-spe-title{
+  font-weight:800;
+  font-size:16px;
+  letter-spacing:.2px;
+  color:#0b2b46;
 }
 
-/* Body */
-.ucla-spe-body {
-  padding: 12px;
-  background: var(--panel);
+.ucla-spe-body{
+  padding:12px;
+  background:#ffffff;
 }
 
-.ucla-spe-grid {
-  display: grid;
-  grid-template-columns: 128px 1fr;
-  gap: 12px;
-  align-items: start;
+.ucla-spe-grid{
+  display:grid;
+  grid-template-columns:128px 1fr;
+  gap:12px;
+  align-items:start;
 }
 
-/* Photo block */
-.ucla-spe-photo {
-  width: 128px;
-  height: 164px;
-  border: 1px solid var(--border);
-  background: var(--panel-tint);
+.ucla-spe-photo{
+  width:128px;
+  height:164px;
+  border:1px solid var(--line);
+  background:#f6f9fc;
   border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.ucla-spe-photo-inner {
-  width: calc(100% - 12px);
-  height: calc(100% - 12px);
-  border: 1px dashed var(--border-strong);
-  background: #ffffff;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  color: #64748b;
-  letter-spacing: 0.6px;
+.ucla-spe-photo-inner{
+  width:calc(100% - 12px);
+  height:calc(100% - 12px);
+  border:1px dashed #c2cfdd;
+  background:#fff;
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  color:#64748b;
+  letter-spacing:.6px;
 }
 
-/* Meta rows mimic table rows */
-.ucla-spe-meta {
-  border: 1px solid var(--border);
+.ucla-spe-meta{
+  border:1px solid var(--line);
   border-radius: var(--radius-sm);
-  background: #ffffff;
-  overflow: hidden;
+  background:#fff;
+  overflow:hidden;
 }
 
-.ucla-spe-row {
-  display: grid;
-  grid-template-columns: 170px 1fr;
-  border-bottom: 1px solid var(--border);
+.ucla-spe-row{
+  display:grid;
+  grid-template-columns:170px 1fr;
+  border-bottom:1px solid var(--line);
 }
 
-.ucla-spe-row:last-child {
-  border-bottom: none;
+.ucla-spe-row:last-child{
+  border-bottom:none;
 }
 
-.ucla-spe-cell {
-  padding: 8px 10px;
-  font-size: 13px;
-  line-height: 1.35;
+.ucla-spe-cell{
+  padding:8px 10px;
+  font-size:13px;
+  line-height:1.35;
 }
 
-.ucla-spe-cell-label {
-  background: var(--panel-tint);
-  font-weight: 650;
-  color: #0b2b46;
-  border-right: 1px solid var(--border);
+.ucla-spe-cell-label{
+  background:#f8fafc;
+  font-weight:700;
+  color:#0b2b46;
+  border-right:1px solid var(--line);
 }
 
-.ucla-spe-cell-value {
-  background: #ffffff;
-  color: var(--text);
+.ucla-spe-cell-value{
+  background:#fff;
+  color:var(--ink);
 }
 
-.ucla-spe-meta-label {
-  font-weight: 650;
-  margin-left: 10px;
-  color: #0b2b46;
+.ucla-spe-meta-label{
+  font-weight:700;
+  margin-left:10px;
+  color:#0b2b46;
 }
 
-.ucla-spe-meta-spacer {
-  display: inline-block;
-  width: 10px;
+.ucla-spe-meta-spacer{
+  display:inline-block;
+  width:10px;
 }
 
-.ucla-spe-linklike {
+.ucla-spe-linklike{
   color: var(--ucla-blue);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset:2px;
   cursor: default;
 }
 
-/* Course box inside meta */
-.ucla-spe-coursebox {
-  padding: 0;
+.ucla-spe-coursebox{
+  padding:0;
 }
 
-.ucla-spe-course-title {
-  background: linear-gradient(180deg, var(--band-strong), var(--band));
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 9px 10px;
-  font-weight: 750;
-  text-align: center;
-  font-size: 14px;
-  color: #0b2b46;
+.ucla-spe-course-title{
+  background: linear-gradient(180deg, #e9f2fb, #f3f7fc);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:9px 10px;
+  font-weight:800;
+  text-align:center;
+  font-size:14px;
+  color:#0b2b46;
 }
 
-/* Table */
-.ucla-spe-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12.5px;
+.ucla-spe-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px;
 }
 
 .ucla-spe-table th,
-.ucla-spe-table td {
-  border: 1px solid var(--border);
-  padding: 8px 10px;
-  text-align: left;
-  vertical-align: top;
+.ucla-spe-table td{
+  border:1px solid var(--line);
+  padding:8px 10px;
+  text-align:left;
+  vertical-align:top;
 }
 
-.ucla-spe-table th {
-  background: #f3f7fc;
-  font-weight: 700;
-  color: #0b2b46;
+.ucla-spe-table th{
+  background:#f8fafc;
+  font-weight:800;
+  color:#0b2b46;
 }
 
-/* Evaluation period band */
-.ucla-spe-period {
-  background: #f3f7fc;
-  border-top: 1px solid var(--border);
-  padding: 8px 10px;
-  font-size: 12.5px;
-  color: #0b2b46;
+.ucla-spe-period{
+  background:#f8fafc;
+  border-top:1px solid var(--line);
+  padding:8px 10px;
+  font-size:12.5px;
+  color:#0b2b46;
 }
 
-.ucla-spe-period-label {
-  font-weight: 700;
-}
+.ucla-spe-period-label{ font-weight:800; }
+.ucla-spe-period-value{ margin-left:6px; color:var(--ink); }
 
-.ucla-spe-period-value {
-  margin-left: 6px;
-  color: #0f172a;
-}
-
-/* Small screens */
-@media (max-width: 700px) {
-  .content {
-    padding: 12px 12px 22px;
-  }
-
-  .ucla-spe-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ucla-spe-photo {
-    width: 100%;
-    height: 180px;
-  }
-
-  .ucla-spe-row {
-    grid-template-columns: 140px 1fr;
-
-     /* =========================
+/* =========================
    SURVEY (questions) styling
+   Styled like your older clean version
    ========================= */
 
-/* Section divider like "Setting", "Evaluation", "Comments" */
-.sectionHeader {
-  margin: 14px 0 8px;
-  padding: 9px 12px;
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--band-strong), var(--band));
+.sectionHeader{
+  margin:20px 0 8px;
+  font-weight:800;
+  letter-spacing:.3px;
+  font-size:12.5px;
+  color:#111827;
+  text-transform:uppercase;
+}
+
+.questionCard{
+  border:1px solid var(--border);
   border-radius: var(--radius-sm);
-  font-weight: 750;
-  font-size: 13px;
-  letter-spacing: 0.2px;
-  color: #0b2b46;
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+  padding:12px;
+  margin:12px 0;
+  box-shadow: var(--shadow);
+  background:#ffffff;
 }
 
-/* Each question card */
-.questionCard {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: #ffffff;
-  box-shadow: 0 1px 8px rgba(15, 23, 42, 0.04);
-  padding: 10px 12px 12px;
-  margin: 0 0 10px;
+.qTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  border-bottom:2px solid var(--blue);
+  padding-bottom:8px;
+  margin-bottom:10px;
 }
 
-/* Top row: title + meta */
-.qTop {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #eef2f7;
+.qTitle{
+  font-weight:750;
+  font-size:14px;
+  line-height:1.3;
+  color:#111827;
 }
 
-.qTitle {
-  font-weight: 750;
-  font-size: 13.5px;
-  line-height: 1.35;
-  color: var(--text);
+.qReq{
+  color:#b91c1c;
+  font-weight:800;
+  margin-left:4px;
 }
 
-.qReq {
-  color: #b91c1c;
-  margin-left: 4px;
-  font-weight: 800;
+.qMeta{
+  color:var(--muted);
+  font-size:12px;
+  white-space:nowrap;
 }
 
-/* Right side chip */
-.qMeta {
-  flex: 0 0 auto;
-  font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.6px;
-  color: #0b2b46;
-  background: #f3f7fc;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 4px 8px;
-  line-height: 1;
-  margin-top: 1px;
+.levels{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-bottom:10px;
 }
 
-/* Setting and Yes/No choice rows */
-.inlineChoices {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.inlineChoices label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  background: #ffffff;
-  border-radius: 10px;
-  cursor: pointer;
-  user-select: none;
-  font-size: 13px;
-  line-height: 1;
-  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
-}
-
-.inlineChoices label:hover {
-  background: #f8fafc;
-  border-color: var(--border-strong);
-}
-
-.inlineChoices input[type="radio"] {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--ucla-blue);
-}
-
-/* Rubric levels stack */
-.levels {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* One level row */
-.levelBox {
-  border: 1px solid var(--border);
+.levelBox{
+  background: var(--panel);
+  border:1px solid var(--border);
   border-radius: var(--radius-sm);
-  background: #ffffff;
-  transition: border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  padding:10px;
 }
 
-.levelBox:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 1px 10px rgba(15, 23, 42, 0.05);
+.levelLabel{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  cursor:pointer;
 }
 
-/* Clickable label fills the box */
-.levelLabel {
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  gap: 10px;
-  padding: 10px 10px;
-  cursor: pointer;
+.levelLabel input{
+  margin-top:2px;
+  transform:scale(1.05);
+  accent-color: var(--blue);
 }
 
-.levelLabel input[type="radio"] {
-  margin-top: 2px;
-  width: 16px;
-  height: 16px;
-  accent-color: var(--ucla-blue);
+.levelText{ width:100%; }
+
+.levelHeadline{
+  font-weight:800;
+  font-size:13px;
+  margin-bottom:4px;
+  color:#111827;
 }
 
-/* Text inside each level */
-.levelText {
-  min-width: 0;
+ul.bullets{
+  margin:6px 0 0 18px;
+  padding:0;
+  font-size:12.5px;
+  line-height:1.35;
+  color:#334155;
 }
 
-.levelHeadline {
-  font-weight: 800;
-  font-size: 12.75px;
-  color: #0b2b46;
-  margin-bottom: 6px;
+.freeText{
+  margin-top:10px;
 }
 
-/* Bullets */
-.bullets {
-  margin: 0;
-  padding-left: 16px;
-  color: #334155;
-  font-size: 12.5px;
-  line-height: 1.35;
+.fieldLabel{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+  font-weight:700;
 }
 
-.bullets li {
-  margin: 3px 0;
-}
-
-/* Textarea / free text */
-.freeText {
-  margin-top: 2px;
-}
-
-.fieldLabel {
-  font-size: 12.5px;
-  line-height: 1.35;
-  color: #475569;
-  margin: 0 0 8px;
-}
-
-textarea {
-  width: 100%;
-  min-height: 120px;
-  border: 1px solid var(--border);
+/* textarea for placeholder; if you want it disabled-looking, keep cursor + bg */
+textarea{
+  width:100%;
+  min-height:110px;
+  border:1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 10px 10px;
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--text);
-  background: #ffffff;
-  resize: vertical;
-  outline: none;
-  transition: border-color 120ms ease, box-shadow 120ms ease;
+  padding:10px;
+  font-size:13px;
+  line-height:1.4;
+  resize:vertical;
+  background: var(--panel2);
+  color:#111827;
+  outline:none;
 }
 
-textarea:focus {
-  border-color: #93b7d6;
-  box-shadow: 0 0 0 3px rgba(47, 111, 159, 0.14);
+textarea:focus{
+  border-color:#93b7d6;
+  box-shadow: 0 0 0 3px rgba(43,108,176,.14);
 }
 
-/* Print: remove shadows/big chrome */
-@media print {
-  .topbar,
-  .footer {
-    display: none;
+.inlineChoices{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+
+.inlineChoices label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.inlineChoices input{
+  accent-color: var(--blue);
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+.footer{
+  border-top:1px solid #e5e7eb;
+  padding:10px 16px;
+  font-size:12px;
+  background:#fbfbfc;
+  color:#475569;
+}
+
+.footer-note{
+  margin-bottom:6px;
+  color:#111827;
+}
+
+.footer-meta{
+  color:#64748b;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 700px){
+  .content{
+    padding:12px 12px 22px;
   }
 
-  .ucla-spe-header.is-sticky {
-    position: static;
-    box-shadow: none;
+  .ucla-spe-grid{
+    grid-template-columns:1fr;
+  }
+
+  .ucla-spe-photo{
+    width:100%;
+    height:180px;
+  }
+
+  .ucla-spe-row{
+    grid-template-columns:140px 1fr;
+  }
+}
+
+/* =========================
+   PRINT
+   ========================= */
+@media print{
+  .topbar,
+  .footer{
+    display:none;
+  }
+
+  .ucla-spe-header.is-sticky{
+    position:static;
+    box-shadow:none;
   }
 
   .questionCard,
-  .ucla-spe-header {
-    box-shadow: none;
+  .ucla-spe-header{
+    box-shadow:none;
   }
 }
-
-  }
-}
-
