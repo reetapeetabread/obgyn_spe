@@ -297,6 +297,219 @@ body {
 
   .ucla-spe-row {
     grid-template-columns: 140px 1fr;
+
+     /* =========================
+   SURVEY (questions) styling
+   ========================= */
+
+/* Section divider like "Setting", "Evaluation", "Comments" */
+.sectionHeader {
+  margin: 14px 0 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--band-strong), var(--band));
+  border-radius: var(--radius-sm);
+  font-weight: 750;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+  color: #0b2b46;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+}
+
+/* Each question card */
+.questionCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: 0 1px 8px rgba(15, 23, 42, 0.04);
+  padding: 10px 12px 12px;
+  margin: 0 0 10px;
+}
+
+/* Top row: title + meta */
+.qTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.qTitle {
+  font-weight: 750;
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.qReq {
+  color: #b91c1c;
+  margin-left: 4px;
+  font-weight: 800;
+}
+
+/* Right side chip */
+.qMeta {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.6px;
+  color: #0b2b46;
+  background: #f3f7fc;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 8px;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* Setting and Yes/No choice rows */
+.inlineChoices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inlineChoices label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  line-height: 1;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.inlineChoices label:hover {
+  background: #f8fafc;
+  border-color: var(--border-strong);
+}
+
+.inlineChoices input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ucla-blue);
+}
+
+/* Rubric levels stack */
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* One level row */
+.levelBox {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  transition: border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.levelBox:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 1px 10px rgba(15, 23, 42, 0.05);
+}
+
+/* Clickable label fills the box */
+.levelLabel {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  padding: 10px 10px;
+  cursor: pointer;
+}
+
+.levelLabel input[type="radio"] {
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ucla-blue);
+}
+
+/* Text inside each level */
+.levelText {
+  min-width: 0;
+}
+
+.levelHeadline {
+  font-weight: 800;
+  font-size: 12.75px;
+  color: #0b2b46;
+  margin-bottom: 6px;
+}
+
+/* Bullets */
+.bullets {
+  margin: 0;
+  padding-left: 16px;
+  color: #334155;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.bullets li {
+  margin: 3px 0;
+}
+
+/* Textarea / free text */
+.freeText {
+  margin-top: 2px;
+}
+
+.fieldLabel {
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #475569;
+  margin: 0 0 8px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 10px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text);
+  background: #ffffff;
+  resize: vertical;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+textarea:focus {
+  border-color: #93b7d6;
+  box-shadow: 0 0 0 3px rgba(47, 111, 159, 0.14);
+}
+
+/* Print: remove shadows/big chrome */
+@media print {
+  .topbar,
+  .footer {
+    display: none;
+  }
+
+  .ucla-spe-header.is-sticky {
+    position: static;
+    box-shadow: none;
+  }
+
+  .questionCard,
+  .ucla-spe-header {
+    box-shadow: none;
+  }
+}
+
   }
 }
 
