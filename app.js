@@ -667,10 +667,6 @@ function wireButtons() {
 function onSettingChange(newSettingKey) {
   STATE.responses[SETTING_QUESTION.id] = newSettingKey;
 
-  // lock header once evaluation starts
-  const header = document.querySelector(".ucla-spe-header");
-  if (header) header.classList.add("is-sticky");
-
   renderSurvey(buildSurvey(newSettingKey), root);
 }
 
