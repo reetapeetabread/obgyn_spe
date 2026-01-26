@@ -1,12 +1,3 @@
-/**
- * Branching rubric survey:
- * - Setting question is NOT numbered
- * - NOTHING else renders until setting chosen
- * - Rubric questions start at 1
- * - Rubric choices 0–4 are vertical via CSS
- * - Comments section is a placeholder (text is collected locally unless you disable it)
- */
-
 const STATE = { responses: {} };
 
 /* -------------------- BUILDERS -------------------- */
@@ -39,7 +30,6 @@ function escapeHtml(s) {
 }
 
 function cssEscape(s) {
-  // Good enough for your ids (no quotes expected)
   return String(s).replaceAll('"', '\\"');
 }
 
