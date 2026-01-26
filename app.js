@@ -667,14 +667,16 @@ function onSettingChange(newSettingKey) {
 /* -------------------- RENDERERS -------------------- */
 
 function renderSurvey(survey, mount) {
-  if (!mount) return;
   mount.innerHTML = "";
 
   survey.sections.forEach((section) => {
+    const sectionWrap = document.createElement("div");
+    sectionWrap.className = "surveySection";
+
     const h = document.createElement("div");
     h.className = "sectionHeader";
     h.textContent = section.title;
-    mount.appendChild(h);
+    sectionWrap.appendChild(h);
 
     section.items.forEach((item) => {
       const card = document.createElement("section");
@@ -691,24 +693,30 @@ function renderSurvey(survey, mount) {
 
       const meta = document.createElement("div");
       meta.className = "qMeta";
-      meta.textContent = section.title.toUpperCase();
+      meta.textContent = section.title;
 
       top.appendChild(title);
       top.appendChild(meta);
       card.appendChild(top);
 
-      if (item.type === "setting") card.appendChild(renderSetting(item));
-      else if (item.type === "rubric") card.appendChild(renderRubric(item));
-      else if (item.type === "textarea") card.appendChild(renderTextarea(item));
-      else if (item.type === "yesno") card.appendChild(renderYesNo(item));
-      else {
+      if (item.type === "setting") {
+        card.appendChild(renderSetting(item));
+      } else if (item.type === "rubric") {
+        card.appendChild(renderRubric(item));
+      } else if (item.type === "textarea") {
+        card.appendChild(renderTextarea(item));
+      } else if (item.type === "yesno") {
+        card.appendChild(renderYesNo(item));
+      } else {
         const p = document.createElement("div");
         p.textContent = "Unsupported item type: " + item.type;
         card.appendChild(p);
       }
 
-      mount.appendChild(card);
+      sectionWrap.appendChild(card);
     });
+
+    mount.appendChild(sectionWrap);
   });
 }
 
