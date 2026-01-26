@@ -4,7 +4,7 @@
  * - NOTHING else renders until setting chosen
  * - Rubric questions start at 1
  * - Rubric choices 0–4 are vertical via CSS
- * - Comments section is a placeholder
+ * - Comments section is a placeholder (text is collected locally unless you disable it)
  */
 
 const STATE = { responses: {} };
@@ -39,10 +39,11 @@ function escapeHtml(s) {
 }
 
 function cssEscape(s) {
+  // Good enough for your ids (no quotes expected)
   return String(s).replaceAll('"', '\\"');
 }
 
-/* -------------------- DATA -------------------- */
+/* -------------------- SETTING QUESTION -------------------- */
 
 const SETTING_QUESTION = {
   type: "setting",
@@ -56,37 +57,6 @@ const SETTING_QUESTION = {
     { key: "SURGERY", label: "Surgery" }
   ]
 };
-
-/* -------------------- YOUR QUESTION BANKS -------------------- */
-/* Keep your BRANCH_QUESTIONS, SHARED_QUESTIONS, COMMENTS_BLOCK as-is */
-const BRANCH_QUESTIONS = { /* ... */ };
-const SHARED_QUESTIONS = [ /* ... */ ];
-const COMMENTS_BLOCK = [ /* ... */ ];
-
-/* -------------------- SURVEY BUILD -------------------- */
-
-function getSetting() {
-  return STATE.responses[SETTING_QUESTION.id] || "";
-}
-
-function buildSurvey(settingKey) {
-  if (!settingKey) {
-    return {
-      sections: [{ id: "setting", title: "Setting", items: [SETTING_QUESTION] }]
-    };
-  }
-
-  const branch = BRANCH_QUESTIONS[settingKey] || [];
-
-  // IMPORTANT: no +1 shifting. Your branch starts at 1 already.
-  return {
-    sections: [
-      { id: "setting", title: "Setting", items: [SETTING_QUESTION] },
-      { id: "core", title: "Evaluation", items: [...branch, ...SHARED_QUESTIONS] },
-      { id: "comments", title: "Comments", items: COMMENTS_BLOCK }
-    ]
-  };
-}
 /* -------------------- BRANCH QUESTIONS -------------------- */
 
 const BRANCH_QUESTIONS = {
@@ -641,43 +611,32 @@ const COMMENTS_BLOCK = [
       "In the official evaluation, faculty comments would appear here in paragraph form."
   }
 ];
-
 /* -------------------- RENDER -------------------- */
 
-const root = document.getElementById("surveyRoot");
+let root = null;
 
-function init() {
+document.addEventListener("DOMContentLoaded", () => {
+  root = document.getElementById("surveyRoot");
+  if (!root) {
+    console.error('Missing element: <div id="surveyRoot"></div>');
+    return;
+  }
   wireButtons();
   renderSurvey(buildSurvey(getSetting()), root);
-}
-
-function wireButtons() {
-  const btnPrint = document.getElementById("btnPrint");
-  if (btnPrint) btnPrint.addEventListener("click", () => window.print());
-
-  const btnSave = document.getElementById("btnSave");
-  if (btnSave) {
-    btnSave.addEventListener("click", () => {
-      const data = collectResponses(buildSurvey(getSetting()));
-      downloadJson(data, "survey_responses.json");
-    });
-  }
-}
+});
 
 function onSettingChange(newSettingKey) {
   STATE.responses[SETTING_QUESTION.id] = newSettingKey;
-
   renderSurvey(buildSurvey(newSettingKey), root);
 }
 
 function renderSurvey(survey, mount) {
   mount.innerHTML = "";
 
-  // Ensure surveyRoot spacing is active even if CSS misses it
+  // Optional wrapper class for layout
   mount.classList.add("surveyRoot");
 
   survey.sections.forEach((section) => {
-    // Optional wrapper per section (cleaner spacing)
     const sectionWrap = document.createElement("div");
     sectionWrap.className = "surveySection";
 
@@ -694,12 +653,9 @@ function renderSurvey(survey, mount) {
       const top = document.createElement("div");
       top.className = "qTop";
 
-      // Renumbering rule:
-      // - Setting question: no number
-      // - Everything else: start at 2 (so item.number 1 -> 2, 2 -> 3, etc.)
       const isSetting = item.type === "setting";
       const displayNumber =
-        !isSetting && typeof item.number === "number" ? item.number + 1 : null;
+        !isSetting && typeof item.number === "number" ? item.number : null;
 
       const title = document.createElement("div");
       title.className = "qTitle";
@@ -732,6 +688,8 @@ function renderSurvey(survey, mount) {
   });
 }
 
+/* -------------------- ITEM RENDERERS -------------------- */
+
 function renderSetting(item) {
   const wrap = document.createElement("div");
   wrap.className = "freeText";
@@ -741,6 +699,7 @@ function renderSetting(item) {
 
   item.options.forEach((opt) => {
     const label = document.createElement("label");
+
     const input = document.createElement("input");
     input.type = "radio";
     input.name = item.id;
@@ -836,7 +795,9 @@ function collectResponses(survey) {
   survey.sections.forEach((section) => {
     section.items.forEach((item) => {
       if (item.type === "rubric" || item.type === "setting") {
-        const chosen = document.querySelector(`input[name="${cssEscape(item.id)}"]:checked`);
+        const chosen = document.querySelector(
+          `input[name="${cssEscape(item.id)}"]:checked`
+        );
         if (chosen) STATE.responses[item.id] = chosen.value;
       } else if (item.type === "textarea") {
         const ta = document.querySelector(`textarea[name="${cssEscape(item.id)}"]`);
@@ -855,15 +816,29 @@ function collectResponses(survey) {
 function downloadJson(obj, filename) {
   const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement("a");
   a.href = url;
   a.download = filename;
   document.body.appendChild(a);
   a.click();
   a.remove();
+
   URL.revokeObjectURL(url);
 }
 
-init();
+/* -------------------- BUTTONS -------------------- */
 
+function wireButtons() {
+  const btnPrint = document.getElementById("btnPrint");
+  if (btnPrint) btnPrint.addEventListener("click", () => window.print());
+
+  const btnSave = document.getElementById("btnSave");
+  if (btnSave) {
+    btnSave.addEventListener("click", () => {
+      const data = collectResponses(buildSurvey(getSetting()));
+      downloadJson(data, "survey_responses.json");
+    });
+  }
+}
 
