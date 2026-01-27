@@ -49,6 +49,17 @@ function cssEscape(s) {
 /* =========================
    SETTING QUESTION (ALWAYS FIRST)
    ========================= */
+const PLACEHOLDER_QUESTION = {
+  type: "placeholder",
+  id: "placeholder_intro",
+  number: null, // unnumbered
+  required: false,
+  prompt: "The Liaison Committee on Medical Education (LCME), the national accrediting agency for medical schools, prohibits any individual from evaluating a medical student’s performance if they are providing the student with any health services. The LCME guideline specifically states: The health professionals who provide health services, including psychiatric or psychological counseling, to a medical student have no involvement in the academic assessment or promotion of the medical student receiving those services. Please see the DGSOM Duality of Interest page for the full policy statement. If you are providing this student with any health services, you have a duality of interest and this evaluation will not be available for you to complete.",
+   options: [
+    { label: "I have a duality of interest and cannot evaluate this student." },
+    { label: "I do not have a duality of interest and can evaluate this student." },
+  ]
+};
 
 const SETTING_QUESTION = {
   type: "setting",
