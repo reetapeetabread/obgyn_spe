@@ -714,7 +714,7 @@ function renderSurvey(survey, mount) {
       const isSetting = item.type === "setting";
       const displayNumber =
         !isSetting && typeof item.number === "number"
-          ? item.number + 1
+          ? item.number
           : null;
 
       const title = document.createElement("div");
