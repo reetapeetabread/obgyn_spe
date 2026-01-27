@@ -121,7 +121,7 @@ function buildSurvey(settingKey) {
 const BRANCH_QUESTIONS = {
   INPATIENT: [
     rubricItem({
-      id: "q1_information_gathering",
+      id: "inpatient_q1_information_gathering",
       number: 1,
       required: true,
       prompt: "INFORMATION GATHERING",
@@ -150,7 +150,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q2_clinical_reasoning",
+      id: "inpatient_q2_clinical_reasoning",
       number: 2,
       required: true,
       prompt: "CLINICAL REASONING",
@@ -179,7 +179,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q3_management_treatment",
+      id: "inpatient_q3_management_treatment",
       number: 3,
       required: true,
       prompt: "MANAGEMENT AND TREATMENT PLANNING",
@@ -208,7 +208,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q4_presentations_documentation",
+      id: "inpatient_q4_presentations_documentation",
       number: 4,
       required: true,
       prompt: "ORAL PRESENTATIONS AND DOCUMENTATION",
@@ -240,7 +240,7 @@ const BRANCH_QUESTIONS = {
 
   AMBULATORY: [
     rubricItem({
-      id: "q1_information_gathering",
+      id: "ambulatory_q1_information_gathering",
       number: 1,
       required: true,
       prompt: "INFORMATION GATHERING",
@@ -269,7 +269,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q2_clinical_reasoning",
+      id: "ambulatory_q2_clinical_reasoning",
       number: 2,
       required: true,
       prompt: "CLINICAL REASONING",
@@ -298,7 +298,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q3_management_followup",
+      id: "ambulatory_q3_management_followup",
       number: 3,
       required: true,
       prompt: "MANAGEMENT AND FOLLOW-UP PLANNING",
@@ -327,7 +327,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q4_presentations_documentation",
+      id: "ambulatory_q4_presentations_documentation",
       number: 4,
       required: true,
       prompt: "ORAL PRESENTATIONS AND DOCUMENTATION",
@@ -359,7 +359,7 @@ const BRANCH_QUESTIONS = {
 
   SURGERY: [
     rubricItem({
-      id: "q1_preop_preparation",
+      id: "surgery_q1_preop_preparation",
       number: 1,
       required: true,
       prompt: "PRE-OPERATIVE CASE PREPARATION",
@@ -388,7 +388,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q2_fund_of_knowledge",
+      id: "surgery_q2_fund_of_knowledge",
       number: 2,
       required: true,
       prompt: "FUND OF KNOWLEDGE",
@@ -417,7 +417,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q3_perioperative_support",
+      id: "surgery_q3_perioperative_support",
       number: 3,
       required: true,
       prompt: "PERIOPERATIVE SUPPORT AND PATIENT CARE",
@@ -446,7 +446,7 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "q4_intraop_technique",
+      id: "surgery_q4_intraop_technique",
       number: 4,
       required: true,
       prompt: "INTRAOPERATIVE SURGICAL TECHNIQUE",
