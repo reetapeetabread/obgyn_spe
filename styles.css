@@ -49,6 +49,9 @@ body {
 }
 
 .page {
+  max-width: 980px;     /* ← controls page width */
+  margin: 0 auto;       /* ← centers the page */
+  padding: 0;           /* keep clean */
   min-height: 100%;
   display: flex;
   flex-direction: column;
