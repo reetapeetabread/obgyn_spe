@@ -79,7 +79,9 @@ body {
 
 .content {
   padding: 16px;
-  flex: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* =========================
