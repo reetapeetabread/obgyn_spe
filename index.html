@@ -79,6 +79,47 @@
             </div>
           </div>
         </section>
+
+        <!-- Duality of Interest Section -->
+        <section class="duality-section" style="background-color: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+          <h3 style="color: #856404; margin-top: 0; margin-bottom: 15px; font-size: 18px; font-weight: 600;">Important: Duality of Interest Policy</h3>
+          
+          <div style="color: #333; line-height: 1.6; margin-bottom: 20px;">
+            <p style="margin-bottom: 12px;">
+              The Liaison Committee on Medical Education (LCME), the national accrediting agency for medical schools, prohibits any individual from evaluating a medical student's performance if they are providing the student with any health services. The LCME guideline specifically states: 
+            </p>
+            <p style="margin-bottom: 12px; font-style: italic; padding-left: 20px; border-left: 3px solid #ffc107;">
+              "The health professionals who provide health services, including psychiatric/psychological counseling, to a medical student have no involvement in the academic assessment or promotion of the medical student receiving those services."
+            </p>
+            <p style="margin-bottom: 12px;">
+              Please see the <a href="#" style="color: #003057; text-decoration: underline;">DGSOM Duality of Interest page</a> for a full policy statement. If you are providing this student with any health services, then you have a duality of interest and the evaluation will not be available for you to complete.
+            </p>
+            <p style="margin-bottom: 0; font-weight: 500;">
+              If you cannot continue, please:
+            </p>
+            <ul style="margin-top: 8px; margin-bottom: 15px; padding-left: 20px;">
+              <li>Exit from the evaluation to the list of evaluations you have to complete</li>
+              <li>Select "Cannot evaluate" for this evaluation</li>
+              <li>Type "Duality of Interest" in the explanation text box. <strong>DO NOT GIVE ANY MORE INFORMATION.</strong></li>
+            </ul>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: center; padding: 12px; background-color: #f8d7da; border: 1px solid #dc3545; border-radius: 6px;">
+              <input type="radio" id="duality-yes" name="duality" value="yes" style="margin-right: 10px; cursor: not-allowed;" disabled>
+              <label for="duality-yes" style="color: #721c24; font-size: 15px; cursor: not-allowed;">
+                I have a duality of interest and cannot evaluate this student.
+              </label>
+            </div>
+            
+            <div style="display: flex; align-items: center; padding: 12px; background-color: #d4edda; border: 2px solid #28a745; border-radius: 6px;">
+              <input type="radio" id="duality-no" name="duality" value="no" checked style="margin-right: 10px; cursor: default; pointer-events: none;">
+              <label for="duality-no" style="color: #155724; font-size: 15px; font-weight: 500; cursor: default;">
+                ✓ I do not have a duality of interest and can evaluate this student.
+              </label>
+            </div>
+          </div>
+        </section>
             
         <!-- app.js renders questions here -->
         <div id="surveyRoot"></div>
