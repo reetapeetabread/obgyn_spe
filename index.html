@@ -80,31 +80,38 @@
           </div>
         </section>
       
-       <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-          <div style="margin-bottom: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #003057;">
-              <div style="color: #000; font-size: 16px; font-weight: 600; line-height: 1.5;">
+   <div class="surveySection">
+          <div class="questionCard">
+            <div class="qTop">
+              <div class="qTitle">
                 The Liaison Committee on Medical Education (LCME), the national accrediting agency for medical schools, prohibits any individual from evaluating a medical student's performance if they are providing the student with any health services. The LCME guideline specifically states: "The health professionals who provide health services, including psychiatric/psychological counseling, to a medical student have no involvement in the academic assessment or promotion of the medical student receiving those services." Please see the DGSOM Duality of Interest page for a full policy statement. If you are providing this student with any health services, then you have a duality of interest and the evaluation will not be available for you to complete. If you cannot continue, please: Exit from the evaluation to the list of evaluations you have to complete; Select "Cannot evaluate" for this evaluation; Type "Duality of Interest" in the explanation text box. DO NOT GIVE ANY MORE INFORMATION.
-                <span style="color: #dc3545; margin-left: 4px;">*</span>
+                <span class="qReq">*</span>
               </div>
-              <div style="background-color: #e9ecef; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #495057; white-space: nowrap; margin-left: 20px;">
-                DUALITY OF INTEREST
-              </div>
+              <div class="qMeta">DUALITY OF INTEREST</div>
             </div>
             
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-              <label style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #dee2e6; border-radius: 6px; cursor: not-allowed; background-color: #fff;">
-                <input type="radio" name="duality" value="cannot" disabled style="margin-right: 12px; cursor: not-allowed;">
-                <span style="font-size: 15px; color: #666;">I have a duality of interest and cannot evaluate this student.</span>
-              </label>
+            <div class="levels">
+              <div class="levelBox">
+                <label class="levelLabel">
+                  <input type="radio" name="duality" value="cannot" disabled>
+                  <div class="levelText">
+                    <div class="levelHeadline">I have a duality of interest and cannot evaluate this student.</div>
+                  </div>
+                </label>
+              </div>
               
-              <label style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #dee2e6; border-radius: 6px; cursor: default; background-color: #fff;">
-                <input type="radio" name="duality" value="can" checked style="margin-right: 12px; pointer-events: none;">
-                <span style="font-size: 15px; font-weight: 500;">I do not have a duality of interest and can evaluate this student.</span>
-              </label>
+              <div class="levelBox">
+                <label class="levelLabel">
+                  <input type="radio" name="duality" value="can" checked style="pointer-events: none;">
+                  <div class="levelText">
+                    <div class="levelHeadline">I do not have a duality of interest and can evaluate this student.</div>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
         </div>
+        
       
         <!-- app.js renders questions here -->
         <div id="surveyRoot"></div>
