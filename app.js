@@ -54,7 +54,7 @@ const PLACEHOLDER_QUESTION = {
   id: "placeholder_intro",
   number: null, // unnumbered
   required: false,
-  prompt: "The Liaison Committee on Medical Education (LCME), the national accrediting agency for medical schools, prohibits any individual from evaluating a medical student’s performance if they are providing the student with any health services. The LCME guideline specifically states: The health professionals who provide health services, including psychiatric or psychological counseling, to a medical student have no involvement in the academic assessment or promotion of the medical student receiving those services. Please see the DGSOM Duality of Interest page for the full policy statement. If you are providing this student with any health services, you have a duality of interest and this evaluation will not be available for you to complete.",
+  prompt: "The Liaison Committee on Medical Education (LCME), the national accrediting agency for medical schools, prohibits any individual from evaluating a medical student's performance if they are providing the student with any health services. The LCME guideline specifically states: The health professionals who provide health services, including psychiatric or psychological counseling, to a medical student have no involvement in the academic assessment or promotion of the medical student receiving those services. Please see the DGSOM Duality of Interest page for the full policy statement. If you are providing this student with any health services, you have a duality of interest and this evaluation will not be available for you to complete.",
    options: [
     { label: "I have a duality of interest and cannot evaluate this student." },
     { label: "I do not have a duality of interest and can evaluate this student." },
@@ -123,10 +123,6 @@ function buildSurvey(settingKey) {
    (BRANCH_QUESTIONS, SHARED_QUESTIONS, COMMENTS_BLOCK)
    ========================= */
 
-// your BRANCH_QUESTIONS object
-// your SHARED_QUESTIONS array
-// your COMMENTS_BLOCK array
-
 /* -------------------- BRANCH QUESTIONS -------------------- */
 
 const BRANCH_QUESTIONS = {
@@ -168,24 +164,24 @@ const BRANCH_QUESTIONS = {
       levels: [
         level0(),
         level(1, "Needs Improvement", [
-          "Knowledge gaps limit recognition of key inpatient diagnoses",
-          "Generates an incomplete, disorganized, or poorly supported differential",
-          "Unable to articulate reasoning clearly during rounds"
+          "Knowledge gaps limit recognition of key inpatient diagnoses.",
+          "Generates an incomplete, disorganized, or poorly supported differential.",
+          "Unable to articulate reasoning clearly during rounds."
         ]),
         level(2, "Progressing towards Expectations", [
-          "Recognizes common causes but misses important nuances",
-          "Creates a differential lacking adequate depth, structure, or prioritization",
-          "Explains diagnostic reasoning inconsistently or without a clear approach"
+          "Recognizes common causes but misses important nuances.",
+          "Creates a differential lacking adequate depth, structure, or prioritization.",
+          "Explains diagnostic reasoning inconsistently or without a clear approach."
         ]),
         level(3, "Meets Expectations", [
-          "Demonstrates solid knowledge of common and moderately complex inpatient conditions",
-          "Creates a well-structured, data-supported differential that is appropriately prioritized",
-          "Explains diagnostic logic clearly, logically, and using relevant medical evidence"
+          "Demonstrates solid knowledge of common and moderately complex inpatient conditions.",
+          "Creates a well-structured, data-supported differential that is appropriately prioritized.",
+          "Explains diagnostic logic clearly, logically, and using relevant medical evidence."
         ]),
         level(4, "Exceeds Expectations", [
-          "Applies comprehensive knowledge to generate strong medical insight",
-          "Develops a complete, well-prioritized differential that fully integrates evolving clinical data",
-          "Integrates evidence and pathophysiology to guide confident real-time decisions during the visit"
+          "Applies comprehensive knowledge to generate strong medical insight.",
+          "Develops a complete, well-prioritized differential that fully integrates evolving clinical data.",
+          "Integrates evidence and pathophysiology to guide confident real-time decisions during the visit."
         ])
       ]
     }),
@@ -193,7 +189,7 @@ const BRANCH_QUESTIONS = {
       id: "inpatient_q3_management_treatment",
       number: 3,
       required: true,
-      prompt: "MANAGEMENT AND TREATMENT PLANNING",
+      prompt: "MANAGEMENT and TREATMENT PLANNING",
       levels: [
         level0(),
         level(1, "Needs Improvement", [
@@ -222,28 +218,28 @@ const BRANCH_QUESTIONS = {
       id: "inpatient_q4_presentations_documentation",
       number: 4,
       required: true,
-      prompt: "ORAL PRESENTATIONS AND DOCUMENTATION",
+      prompt: "ORAL PRESENTATIONS & DOCUMENTATION",
       levels: [
         level0(),
         level(1, "Needs Improvement", [
-          "Disorganized and difficult to follow presentations and/or documentation",
-          "Includes missing data, factual inaccuracies, or irrelevant details",
-          "Provides an assessment and plan that lack clear reasoning"
+          "Disorganized and difficult to follow presentations and/or documentation.",
+          "Includes missing data, factual inaccuracies, or irrelevant details.",
+          "Provides an assessment and plan that lack clear reasoning."
         ]),
         level(2, "Progressing towards Expectations", [
-          "Generally organized but lacks a coherent flow in presentations and/or documentation",
-          "Mostly accurate but contains minor omissions",
-          "Presents an assessment or plan without sufficient clarity or justification"
+          "Generally organized but lacks a coherent flow in presentations and/or documentation.",
+          "Mostly accurate but contains minor omissions.",
+          "Presents an assessment or plan without sufficient clarity or justification."
         ]),
         level(3, "Meets Expectations", [
-          "Organized, concise, and clinically focused presentations and/or documentation",
-          "Accurately summarizes key data and active problems",
-          "Communicates diagnostic reasoning and next steps clearly"
+          "Organized, concise, and clinically focused presentations and/or documentation.",
+          "Accurately summarizes key data and active problems.",
+          "Communicates diagnostic reasoning and next steps clearly."
         ]),
         level(4, "Exceeds Expectations", [
-          "Delivers highly polished, well-structured presentations and/or documentation",
-          "Synthesizes essential information with precision",
-          "Demonstrates advanced reasoning and incorporates shared decision-making effectively"
+          "Delivers highly polished, well-structured presentations and/or documentation.",
+          "Synthesizes essential information with precision.",
+          "Demonstrates advanced reasoning and incorporates shared decision-making effectively."
         ])
       ]
     })
@@ -287,24 +283,24 @@ const BRANCH_QUESTIONS = {
       levels: [
         level0(),
         level(1, "Needs Improvement", [
-          "Misses common outpatient conditions due to knowledge gaps",
-          "Generates a narrow, poorly supported, or incompletely developed differential",
-          "Fails to apply reasoning effectively to prevention or management decisions"
+          "Misses common outpatient conditions due to knowledge gaps.",
+          "Generates a narrow, poorly supported, or incompletely developed differential.",
+          "Fails to apply reasoning effectively to prevention or management decisions."
         ]),
         level(2, "Progressing towards Expectations", [
           "Recognizes common causes but misses important nuances",
-          "Creates a differential lacking adequate depth, structure, or prioritization",
-          "Explains diagnostic reasoning inconsistently or without a clear approach"
+          "Creates a differential lacking adequate depth, structure, or prioritization.",
+          "Explains diagnostic reasoning inconsistently or without a clear approach."
         ]),
         level(3, "Meets Expectations", [
-          "Demonstrates solid knowledge of common and moderately complex outpatient conditions",
-          "Creates a well-structured, contextually supported differential that is appropriately prioritized",
-          "Explains diagnostic logic clearly, logically, and using relevant clinical evidence"
+          "Demonstrates solid knowledge of common and moderately complex outpatient conditions.",
+          "Creates a well-structured, contextually supported differential that is appropriately prioritized.",
+          "Explains diagnostic logic clearly, logically, and using relevant clinical evidence."
         ]),
         level(4, "Exceeds Expectations", [
-          "Applies comprehensive knowledge to generate strong clinical insight",
-          "Develops a complete, well-prioritized differential that incorporates evolving patient information",
-          "Integrates evidence and pathophysiology to guide confident real-time decisions during the visit"
+          "Applies comprehensive knowledge to generate strong clinical insight.",
+          "Develops a complete, well-prioritized differential that incorporates evolving patient information.",
+          "Integrates evidence and pathophysiology to guide confident real-time decisions during the visit."
         ])
       ]
     }),
@@ -312,28 +308,28 @@ const BRANCH_QUESTIONS = {
       id: "ambulatory_q3_management_followup",
       number: 3,
       required: true,
-      prompt: "MANAGEMENT AND FOLLOW-UP PLANNING",
+      prompt: "MANAGEMENT and FOLLOW-UP PLANNING",
       levels: [
         level0(),
         level(1, "Needs Improvement", [
           "Plan lacks structure or rationale for outpatient management",
           "Suggests unsafe or unrealistic interventions",
-          "Requires excessive prompting and fails to identify appropriate follow-up steps"
+          "Requires excessive prompting and fails to identify appropriate follow-up steps."
         ]),
         level(2, "Progressing towards Expectations", [
           "Plan generally appropriate but incomplete for outpatient goals",
           "Provides partial reasoning and needs guidance on follow-up planning",
-          "Selects reasonable tests or treatments only after prompting"
+          "Selects reasonable tests or treatments only after prompting."
         ]),
         level(3, "Meets Expectations", [
           "Creates organized, evidence-based plans that address primary outpatient concerns",
           "Provides clear reasoning that prioritizes decisions for outpatient needs",
-          "Chooses appropriate tests or treatments and executes routine follow-up tasks reliably"
+          "Chooses appropriate tests or treatments and executes routine follow-up tasks reliably."
         ]),
         level(4, "Exceeds Expectations", [
           "Anticipates long-term clinical needs and adjusts plans proactively",
           "Manages evolving outpatient needs with strong situational awareness",
-          "Selects and justifies high-value tests or treatments that account for patient-specific outpatient factors"
+          "Selects and justifies high-value tests or treatments that account for patient-specific outpatient factors."
         ])
       ]
     }),
@@ -341,28 +337,28 @@ const BRANCH_QUESTIONS = {
       id: "ambulatory_q4_presentations_documentation",
       number: 4,
       required: true,
-      prompt: "ORAL PRESENTATIONS AND DOCUMENTATION",
+      prompt: "ORAL PRESENTATIONS & DOCUMENTATION",
       levels: [
         level0(),
         level(1, "Needs Improvement", [
-          "Disorganized and difficult to follow presentations and/or documentation",
-          "Includes missing, inaccurate, or low-yield outpatient information",
-          "Provides an assessment and plan that lack clear reasoning"
+          "Disorganized and difficult to follow presentations and/or documentation.",
+          "Includes missing, inaccurate, or low-yield outpatient information.",
+          "Provides an assessment and plan that lack clear reasoning."
         ]),
         level(2, "Progressing towards Expectations", [
-          "Generally organized but lacks a coherent flow in presentations and/or documentation",
-          "Mostly accurate but contains minor omissions or incomplete outpatient details",
-          "Offers an assessment or plan without sufficient clarity or justification"
+          "Generally organized but lacks a coherent flow in presentations and/or documentation.",
+          "Mostly accurate but contains minor omissions or incomplete outpatient details.",
+          "Offers an assessment or plan without sufficient clarity or justification."
         ]),
         level(3, "Meets Expectations", [
-          "Organized, concise, and clinically focused presentations and/or documentation",
-          "Summarizes key outpatient history, exam findings, and visit priorities accurately",
-          "Communicates diagnostic reasoning and next steps clearly"
+          "Organized, concise, and clinically focused presentations and/or documentation.",
+          "Summarizes key outpatient history, exam findings, and visit priorities accurately.",
+          "Communicates diagnostic reasoning and next steps clearly."
         ]),
         level(4, "Exceeds Expectations", [
-          "Delivers highly polished, well-structured presentations and/or documentation",
-          "Synthesizes essential outpatient information with precision",
-          "Demonstrates advanced reasoning and incorporates shared decision-making effectively"
+          "Delivers highly polished, well-structured presentations and/or documentation.",
+          "Synthesizes essential outpatient information with precision.",
+          "Demonstrates advanced reasoning and incorporates shared decision-making effectively."
         ])
       ]
     })
@@ -406,24 +402,24 @@ const BRANCH_QUESTIONS = {
       levels: [
         level0(),
         level(1, "Needs Improvement", [
-          "Limited understanding of anatomy, physiology, or foundational surgical principles",
-          "Unable to connect surgical concepts to patient care or operative findings",
-          "Shows minimal curiosity or effort to learn from cases"
+          "Limited understanding of anatomy, physiology, or foundational surgical principles.",
+          "Unable to connect surgical concepts to patient care or operative findings.",
+          "Shows minimal curiosity or effort to learn from cases."
         ]),
         level(2, "Progressing towards Expectations", [
-          "Understands general surgical principles but misses key operative details or relationships",
-          "Applies anatomical or procedural knowledge inconsistently or only with prompting",
-          "Shows interest but limited initiative to expand understanding independently"
+          "Understands general surgical principles but misses key operative details or relationships.",
+          "Applies anatomical or procedural knowledge inconsistently or only with prompting.",
+          "Shows interest but limited initiative to expand understanding independently."
         ]),
         level(3, "Meets Expectations", [
-          "Demonstrates solid knowledge of anatomy, pathology, and procedural rationale relevant to surgical care",
-          "Applies anatomical and procedural concepts accurately during discussions or intraoperative teaching",
-          "Asks thoughtful questions and shows consistent improvement"
+          "Demonstrates solid knowledge of anatomy, pathology, and procedural rationale relevant to surgical care.",
+          "Applies anatomical and procedural concepts accurately during discussions or intraoperative teaching.",
+          "Asks thoughtful questions and shows consistent improvement."
         ]),
         level(4, "Exceeds Expectations", [
-          "Applies comprehensive operative knowledge to generate strong surgical insight",
-          "Integrates anatomy, pathology, and evolving case findings into a complete, well-prioritized understanding",
-          "Integrates evidence and pathophysiology to understand real-time operative observations"
+          "Applies comprehensive operative knowledge to generate strong surgical insight.",
+          "Integrates anatomy, pathology, and evolving case findings into a complete, well-prioritized understanding.",
+          "Integrates evidence and pathophysiology to understand real-time operative observations."
         ])
       ]
     }),
@@ -431,7 +427,7 @@ const BRANCH_QUESTIONS = {
       id: "surgery_q3_perioperative_support",
       number: 3,
       required: true,
-      prompt: "PERIOPERATIVE SUPPORT AND PATIENT CARE",
+      prompt: "PERIOPERATIVE SUPPORT and PATIENT CARE",
       levels: [
         level0(),
         level(1, "Needs Improvement", [
@@ -457,175 +453,177 @@ const BRANCH_QUESTIONS = {
       ]
     }),
     rubricItem({
-      id: "surgery_q4_intraop_technique",
+      id: "surgery_q4_intraoperative_technique",
       number: 4,
       required: true,
       prompt: "INTRAOPERATIVE SURGICAL TECHNIQUE",
       levels: [
         level0(),
         level(1, "Needs Improvement", [
-          "Unprepared and unable to navigate expected OR workflow",
-          "Handles instruments unsafely or without awareness of the operative field",
-          "Requires frequent correction and shows minimal engagement with the team"
+          "Unprepared and unable to navigate expected OR workflow.",
+          "Handles instruments unsafely or without awareness of the operative field.",
+          "Requires frequent correction and shows minimal engagement with the team."
         ]),
         level(2, "Progressing towards Expectations", [
-          "Generally safe but lacks a coherent, reliable approach to basic OR workflow",
-          "Performs simple tasks only when prompted and remains mostly reactive",
-          "Communicates inconsistently with the surgical team and needs reminders about participation"
+          "Generally safe but lacks a coherent, reliable approach to basic OR workflow.",
+          "Performs simple tasks only when prompted and remains mostly reactive.",
+          "Communicates inconsistently with the surgical team and needs reminders about participation."
         ]),
         level(3, "Meets Expectations", [
-          "Organized, attentive, and clinically focused during intraoperative participation",
-          "Participates safely and assists reliably with operative tasks",
-          "Communicates clearly, follows instructions well, and remains attentive and professional throughout the case"
+          "Organized, attentive, and clinically focused during intraoperative participation.",
+          "Participates safely and assists reliably with operative tasks.",
+          "Communicates clearly, follows instructions well, and remains attentive and professional throughout the case."
         ]),
         level(4, "Exceeds Expectations", [
-          "Delivers highly polished, efficient, and well-coordinated intraoperative assistance",
-          "Performs tasks smoothly and efficiently with minimal prompting and strong field awareness",
-          "Supports coordinated teamwork through confident, timely communication and effectively anticipates next steps"
+          "Delivers highly polished, efficient, and well-coordinated intraoperative assistance.",
+          "Performs tasks smoothly and efficiently with minimal prompting and strong field awareness.",
+          "Supports coordinated teamwork through confident, timely communication and effectively anticipates next steps."
         ])
       ]
     })
   ]
 };
 
+/* -------------------- SHARED QUESTIONS (Q5-Q10) -------------------- */
+
 const SHARED_QUESTIONS = [
   rubricItem({
-    id: "q5_patient_family_communication",
+    id: "q5_professionalism",
     number: 5,
     required: true,
-    prompt: "COMMUNICATION WITH PATIENTS AND FAMILIES",
+    prompt: "PROFESSIONALISM",
     levels: [
       level0(),
       level(1, "Needs Improvement", [
-        "Disorganized or unclear communication that misses or interrupts patient concerns",
-        "Uses jargon or technical language without checking understanding",
-        "Appears rushed, detached, or insensitive with patients or families"
+        "Frequently late, unreliable, or unprepared without communication",
+        "Demonstrates rudeness, dismissiveness, or insensitivity toward patients or team members",
+        "Resists feedback or shows minimal insight into personal performance or growth areas"
       ]),
       level(2, "Progressing towards Expectations", [
-        "Generally clear but lacks a consistent approach to fully addressing concerns",
-        "Provides information politely but with limited clarity, structure, or confirmation of understanding",
-        "Recognizes emotions or questions but responds superficially"
+        "Generally punctual but occasionally inconsistent or reactive",
+        "Polite and respectful most of the time, but needs reminders about empathy or boundaries",
+        "Receives feedback with variable openness and sometimes struggles to apply it"
       ]),
       level(3, "Meets Expectations", [
-        "Clear, organized, and respectful communication with patients and families",
-        "Uses plain language, checks comprehension, and explains information accurately",
-        "Shows consistent empathy and professionalism appropriate for level"
+        "Reliable, punctual, and well-prepared for clinical duties",
+        "Treats all individuals with respect, compassion, and cultural sensitivity",
+        "Welcomes feedback and applies it to improve performance and clinical care"
       ]),
       level(4, "Exceeds Expectations", [
-        "Delivers polished, compassionate, patient-centered communication",
-        "Explains complex issues clearly while anticipating questions or concerns",
-        "Builds strong rapport, responds proactively to emotional needs, and models excellent communication for peers"
+        "Models exemplary professionalism through consistency, initiative, and accountability",
+        "Actively supports an inclusive, respectful environment for all",
+        "Seeks feedback proactively, reflects deeply, and supports peers in professional growth"
       ])
     ]
   }),
   rubricItem({
-    id: "q6_team_communication",
+    id: "q6_communication_empathy",
     number: 6,
     required: true,
-    prompt: "COMMUNICATION WITH INTERPROFESSIONAL TEAM",
+    prompt: "COMMUNICATION and EMPATHY",
     levels: [
       level0(),
       level(1, "Needs Improvement", [
-        "Misses key updates, orders, or follow-up actions",
-        "Communicates abruptly, unclearly, or without regard for team roles",
-        "Shows unreliable follow-through or inconsistent handoffs"
+        "Uses jargon or overly complex language that confuses patients",
+        "Fails to check understanding or address patient concerns",
+        "Appears rushed, dismissive, or inattentive to emotional or social needs"
       ]),
       level(2, "Progressing towards Expectations", [
-        "Communicates when prompted but participates inconsistently",
-        "Engages respectfully but remains largely passive with the team",
-        "Needs reminders to coordinate tasks, clarify plans, or close communication loops"
+        "Communicates clearly but inconsistently adjusts to patient understanding or concerns",
+        "Shows empathy at times but misses cues or appears task-focused",
+        "Engages adequately but could improve rapport, trust, or shared decision-making"
       ]),
       level(3, "Meets Expectations", [
-        "Communicates clearly, promptly, and professionally with all staff",
-        "Collaborates well across disciplines and supports smooth workflow",
-        "Provides timely updates and dependable handoffs that ensure shared understanding"
+        "Communicates clearly and compassionately using patient-friendly language",
+        "Actively listens, confirms understanding, and addresses concerns thoughtfully",
+        "Builds trust and rapport while respecting patient autonomy and preferences"
       ]),
       level(4, "Exceeds Expectations", [
-        "Delivers polished, proactive, well-coordinated interprofessional communication",
-        "Anticipates team needs, supports workflow, and communicates confidently across roles",
-        "Builds strong, respectful relationships that enhance coordinated care and team efficiency"
+        "Communicates with exceptional clarity, sensitivity, and cultural awareness",
+        "Anticipates patient needs, validates emotions, and navigates difficult conversations skillfully",
+        "Builds strong therapeutic relationships and empowers patients in shared decision-making"
       ])
     ]
   }),
   rubricItem({
-    id: "q7_humanism",
+    id: "q7_advocacy",
     number: 7,
     required: true,
-    prompt: "HUMANISM",
+    prompt: "ADVOCACY",
     levels: [
       level0(),
       level(1, "Needs Improvement", [
-        "Disrespectful, impatient, or judgmental under stress",
-        "Shows bias, dismisses concerns, or appears detached with patients",
-        "Prioritizes personal convenience over patient needs and shows limited sensitivity"
+        "Overlooks or dismisses social barriers affecting patient care",
+        "Fails to recognize inequities or speak up for patient needs",
+        "Shows limited awareness of broader systems or policies impacting care delivery"
       ]),
       level(2, "Progressing towards Expectations", [
-        "Polite and courteous but with limited warmth or emotional awareness",
-        "Recognizes distress but responds briefly or superficially",
-        "Maintains professionalism but focuses more on tasks than patient experience"
+        "Identifies basic social or structural barriers but often needs prompting to act",
+        "Recognizes patient needs but inconsistently follows through or engages resources",
+        "Shows emerging awareness of equity but lacks consistent application"
       ]),
       level(3, "Meets Expectations", [
-        "Consistently respectful, kind, and patient with individuals and families",
-        "Shows empathy even under time pressure or stress",
-        "Communicates inclusively, without judgment, and with appropriate emotional awareness"
+        "Identifies social, financial, or structural barriers and addresses them proactively",
+        "Advocates for individual patient needs and connects them with appropriate resources",
+        "Demonstrates awareness of health equity and systemic factors shaping care"
       ]),
       level(4, "Exceeds Expectations", [
-        "Demonstrates exceptional compassion, humility, and emotional insight",
-        "Responds to distress with a calm, reassuring presence",
-        "Models humanistic care that positively shapes team culture"
+        "Champions patient needs effectively, navigating complex systems to ensure equitable care",
+        "Actively challenges inequities and works to improve care delivery for vulnerable populations",
+        "Demonstrates sophisticated understanding of social determinants and systemic advocacy"
       ])
     ]
   }),
   rubricItem({
-    id: "q8_integrity_work_ethic",
+    id: "q8_teamwork",
     number: 8,
     required: true,
-    prompt: "INTEGRITY AND WORK ETHIC",
+    prompt: "TEAMWORK",
     levels: [
       level0(),
       level(1, "Needs Improvement", [
-        "Frequently late, unprepared, or unreliable in availability",
-        "Fails to complete tasks, orders, or follow-through and avoids accountability",
-        "Shows limited initiative with lapses in professionalism"
+        "Works in isolation or fails to communicate with team members effectively",
+        "Dismisses or ignores input from others, including nurses, residents, or attendings",
+        "Contributes minimally to shared responsibilities or workflow"
       ]),
       level(2, "Progressing towards Expectations", [
-        "Generally dependable with reminders and oversight",
-        "Completes tasks but shows little initiative and acknowledges errors only when prompted",
-        "Maintains basic professionalism but rarely takes independent ownership"
+        "Collaborates when prompted but inconsistently initiates communication or coordination",
+        "Receptive to input at times but can be defensive or slow to integrate feedback",
+        "Participates in team tasks but often needs redirection or reminders"
       ]),
       level(3, "Meets Expectations", [
-        "Reliable, punctual, and consistently prepared for responsibilities",
-        "Takes responsibility for errors and corrects issues independently",
-        "Maintains confidentiality, professionalism, and steady follow-through"
+        "Communicates proactively and collaborates smoothly with the interprofessional team",
+        "Values and integrates input from all team members respectfully and constructively",
+        "Contributes reliably to shared tasks and supports team goals and efficiency"
       ]),
       level(4, "Exceeds Expectations", [
-        "Demonstrates exceptional reliability, initiative, and accountability under stress",
-        "Anticipates team needs and contributes proactively without prompting",
-        "Models exemplary professionalism and ethical conduct for peers and staff"
+        "Facilitates team coordination and strengthens collaboration through clear, timely communication",
+        "Actively seeks and integrates diverse perspectives to enhance care and decision-making",
+        "Models team leadership, supports others, and promotes a positive, inclusive team culture"
       ])
     ]
   }),
   rubricItem({
-    id: "q9_commitment_learning",
+    id: "q9_self_directed_learning",
     number: 9,
     required: true,
-    prompt: "COMMITMENT TO LEARNING",
+    prompt: "SELF-DIRECTED LEARNING",
     levels: [
       level0(),
       level(1, "Needs Improvement", [
-        "Unprepared, disengaged, or defensive during teaching moments",
-        "Does not apply new knowledge to patient care or learning tasks",
-        "Responds poorly to feedback and shows minimal initiative"
+        "Waits passively for teaching or direction and rarely seeks additional learning",
+        "Struggles to identify knowledge gaps or fails to address them independently",
+        "Does not use cases, feedback, or resources to drive personal growth"
       ]),
       level(2, "Progressing towards Expectations", [
-        "Accepts feedback but applies it inconsistently",
-        "Prepares superficially, only when prompted or with close supervision",
-        "Engages variably in educational activities"
+        "Identifies learning needs inconsistently and pursues growth mainly when prompted",
+        "Uses resources or evidence sporadically and does not always integrate learning into practice",
+        "Shows some interest in teaching but rarely initiates or contributes meaningfully"
       ]),
       level(3, "Meets Expectations", [
-        "Seeks feedback and uses it to improve performance",
-        "Prepares independently and applies learning reliably to patient care",
-        "Contributes meaningful teaching points and participates actively in discussions"
+        "Identifies personal learning needs and seeks resources proactively to fill gaps",
+        "Uses evidence-based information to inform care and applies learning to future cases",
+        "Shares knowledge appropriately with peers and contributes to the team's learning environment"
       ]),
       level(4, "Exceeds Expectations", [
         "Identifies learning needs proactively and pursues growth independently",
