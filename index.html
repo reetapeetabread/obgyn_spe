@@ -1,115 +1,34 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="initial-scale=1" />
-    <title>OB/GYN SPE – Preview</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="./app.js" defer></script>
-  </head>
+<!-- app.js renders questions here -->
+      <div id="surveyRoot"></div>
 
-  <body>
-    <div class="page">
-      <header class="topbar">
-        <div class="brand">
-          <div class="brand-title">OB/GYN Student Performance Evaluation</div>
-          <div class="brand-sub">Preview of proposed SPE rubric format</div>
-        </div>
-      </header>
-
-      <main class="content">
-        <!-- Header: NEVER sticky -->
-        <section class="ucla-spe-header no-sticky" aria-label="Student and course header">
-          <div class="ucla-spe-titlebar">
-            <div class="ucla-spe-title">Student Performance Evaluation</div>
-          </div>
-
-          <div class="ucla-spe-body">
-            <div class="ucla-spe-grid">
-              <div class="ucla-spe-photo">
-                <div class="ucla-spe-photo-inner">PHOTO</div>
-              </div>
-
-              <div class="ucla-spe-meta">
-                <div class="ucla-spe-row">
-                  <div class="ucla-spe-cell ucla-spe-cell-label">Student Level</div>
-                  <div class="ucla-spe-cell ucla-spe-cell-value">MS3</div>
-                </div>
-
-                <div class="ucla-spe-row">
-                  <div class="ucla-spe-cell ucla-spe-cell-label">Student</div>
-                  <div class="ucla-spe-cell ucla-spe-cell-value">
-                    Example, Student (she/her/hers)
-                    <span class="ucla-spe-meta-spacer"></span>
-                    <span class="ucla-spe-meta-label">Email:</span>
-                    <span class="ucla-spe-linklike">example@mednet.ucla.edu</span>
-                  </div>
-                </div>
-
-                <div class="ucla-spe-coursebox">
-                  <div class="ucla-spe-course-title">Course Information</div>
-
-                  <table class="ucla-spe-table" role="table" aria-label="Course information">
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Course</th>
-                        <th>Location</th>
-                        <th>Weeks</th>
-                        <th>Credits</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>03/01/2026 - 03/28/2026</td>
-                        <td>OBG-CLERK: Obstetrics &amp; Gynecology</td>
-                        <td>CS</td>
-                        <td>4</td>
-                        <td>4</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div class="ucla-spe-period">
-                  <span class="ucla-spe-period-label">Evaluation Period:</span>
-                  <span class="ucla-spe-period-value">03/01/2026 - 03/28/2026</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div id="surveyRoot"></div>
-      </main>
-
-         <hr style="margin: 40px 0; border: 1px solid #ddd;">
+      <!-- Faculty Feedback Section - ADD HERE, INSIDE MAIN -->
+      <hr style="margin: 40px 0; border: 1px solid #ddd;">
 
       <div class="faculty-feedback-section">
-        <h3 style="text-align: center; color: #003057;">Faculty Reviewer Feedback</h3>
-        <p style="text-align: center;">Please provide your feedback about this evaluation form:</p>
-  
-        <form action="https://formspree.io/f/mbdoaebk" method="POST" style="max-width: 800px; margin: 0 auto;">
+        <form action="https://formspree.io/f/mbdoaebk" method="POST" style="margin: 0 auto;">
           <div style="margin-bottom: 20px;">
-            <label for="feedback"><strong>Feedback/Comments:</strong></label><br>
+            <label for="feedback"><strong>Faculty Review Feedback: Please share any suggested revisions or improvements to the updated SPE form.</strong>Click Submit to record your response.</label><br>
             <textarea id="feedback" name="feedback" rows="4" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
           </div>
           
           <div style="text-align: center;">
-            <button type="submit" style="background-color: #003057; color: white; padding: 6px 20px; border: none; border-radius: 2px; cursor: pointer; font-size: 12px;">
+            <button type="submit" style="background-color: #003057; color: white; padding: 12px 30px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
               Submit Feedback
             </button>
           </div>
         </form>
       </div>
 
-      <footer class="footer">
-        <div class="footer-note" style="text-align: center; margin: 0 auto; max-width: fit-content;">
-          <strong>This is a preview of the updated OB/GYN Student Performance Evaluation.</strong><br />
-          The responses entered here are <strong>not saved</strong> and are shown for formatting demonstration purposes only.
-        </div>
-        <div class="footer-meta">Last survey iteration update: December 2025</div>
-      </footer>
-    </div>
-  </body>
+    </main>
+    <!-- MAIN ENDS HERE -->
+
+    <footer class="footer">
+      <div class="footer-note" style="text-align: center; margin: 0 auto; max-width: fit-content;">
+        <strong>This is a preview of the updated OB/GYN Student Performance Evaluation.</strong><br />
+        The responses entered here are <strong>not saved</strong> and are shown for formatting demonstration purposes only.
+      </div>
+      <div class="footer-meta">Last survey iteration update: December 2025</div>
+    </footer>
+  </div>
+</body>
 </html>
