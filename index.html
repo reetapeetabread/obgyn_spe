@@ -1,27 +1,28 @@
 <!-- app.js renders questions here -->
       <div id="surveyRoot"></div>
-
-      <!-- Faculty Feedback Section - ADD HERE, INSIDE MAIN -->
-      <hr style="margin: 40px 0; border: 1px solid #ddd;">
-
-      <div class="faculty-feedback-section">
-        <form action="https://formspree.io/f/mbdoaebk" method="POST" style="margin: 0 auto;">
-          <div style="margin-bottom: 20px;">
-            <label for="feedback"><strong>Faculty Review Feedback: Please share any suggested revisions or improvements to the updated SPE form.Click Submit to record your response.:</strong></label><br>
-            <textarea id="feedback" name="feedback" rows="4" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-          </div>
-          
-          <div>
-            <button type="submit" style="background-color: #003057; color: white; padding: 12px 30px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
-              Submit
-            </button>
-          </div>
-        </form>
+      
+      <!-- Faculty Feedback Section - Clearly Separated -->
+      <div style="margin-top: 60px; padding-top: 40px; border-top: 3px solid #003057;">
+        <div class="faculty-feedback-section" style="background-color: #f8f9fa; padding: 30px; border-radius: 8px; max-width: 800px; margin: 0 auto;">
+          <h3 style="color: #003057; margin-top: 0; margin-bottom: 20px; font-size: 20px;">Faculty Review Feedback</h3>
+          <form action="https://formspree.io/f/mbdoaebk" method="POST">
+            <div style="margin-bottom: 20px;">
+              <label for="feedback" style="display: block; margin-bottom: 10px; color: #333; font-size: 15px;">
+                Please share any suggested revisions or improvements to the updated SPE form above. Click Submit to record your response:
+              </label>
+              <textarea id="feedback" name="feedback" rows="6" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; resize: vertical; transition: border-color 0.3s;" onfocus="this.style.borderColor='#003057'" onblur="this.style.borderColor='#ddd'"></textarea>
+            </div>
+            
+            <div>
+              <button type="submit" style="background-color: #003057; color: white; padding: 14px 32px; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: 500; transition: background-color 0.3s, transform 0.1s;" onmouseover="this.style.backgroundColor='#004a7c'" onmouseout="this.style.backgroundColor='#003057'" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'">
+                Submit Feedback
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-
     </main>
     <!-- MAIN ENDS HERE -->
-
     <footer class="footer">
       <div class="footer-note" style="text-align: center; margin: 0 auto; max-width: fit-content;">
         <strong>This is a preview of the updated OB/GYN Student Performance Evaluation.</strong><br />
